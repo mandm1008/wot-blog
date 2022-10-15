@@ -1,0 +1,65 @@
+.main {
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+
+  input {
+    width: 100%;
+  }
+}
+
+.image-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+input[type='text'].banner-input {
+  width: 284px;
+  background-color: rgba($color: #000, $alpha: 0.3);
+  color: #fff;
+  font-family: 'Source Sans Pro';
+  font-size: 1.6rem;
+  font-weight: 700;
+  z-index: -1;
+}
+
+.visible-ctn {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin-right: 16px;
+  }
+}
+
+.content-title {
+  display: flex;
+  align-items: center;
+}
+
+.tiny {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .toolbar {
+    flex: 1;
+  }
+
+  .content-ctn {
+    flex: 1;
+
+    .tiny {
+      justify-content: flex-start;
+    }
+  }
+}

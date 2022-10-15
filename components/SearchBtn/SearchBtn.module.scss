@@ -1,0 +1,40 @@
+.search {
+  transition: padding 0.4s linear;
+
+  .input-search {
+    width: 40px;
+    margin-left: -26px;
+    padding: 12px 8px 12px 38px;
+    border-radius: 999px;
+    font-family: 'Merriweather';
+    font-size: 1.4rem;
+    font-weight: 400;
+    background-color: #fff;
+    transition: width 0.4s linear, opacity 0.1s linear;
+    opacity: 0;
+  }
+
+  .close {
+    display: none;
+  }
+
+  &.active {
+    padding: 0;
+    box-shadow: 0 0 0 transparent;
+    background-color: transparent;
+    border-radius: 999px;
+
+    .input-search {
+      opacity: 1;
+      width: 240px;
+      padding-right: 38px;
+    }
+
+    .close {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: -26px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba($color: #000, $alpha: 0.2);
+  opacity: 0;
+  transition: opacity 0.2s linear;
+
+  &.close {
+    display: none;
+  }
+
+  &.in {
+    opacity: 1;
+  }
+
+  .menu {
+    width: 50px;
+    height: 100%;
+    padding: 0 15px;
+    cursor: pointer;
+  }
+
+  .title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+    font-family: 'Source Sans Pro';
+    font-size: 1.6rem;
+    font-weight: 700;
+
+    span {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #757581;
+      margin-right: 12px;
+    }
+  }
+}

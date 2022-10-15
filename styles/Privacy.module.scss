@@ -1,0 +1,36 @@
+.content {
+  width: var(--layout-width);
+  font-family: 'Merriweather';
+
+  .item {
+    margin: 40px 0;
+
+    h2 {
+      margin: 20px 0;
+    }
+
+    h3 {
+      margin: 16px 0;
+    }
+
+    ul {
+      padding-left: 40px;
+    }
+
+    p {
+      margin: 16px 0;
+    }
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 7rem;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .content {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

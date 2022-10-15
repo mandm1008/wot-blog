@@ -1,0 +1,238 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparent; //var(--bg-cl)
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba($color: #fff, $alpha: 0.3);
+  transition: color 0.4s ease;
+  z-index: 99;
+}
+
+.logo {
+  display: block;
+  position: relative;
+  // height: 120px;
+  font-family: 'Satisfy';
+  user-select: none;
+  color: #000;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6.8rem;
+    font-weight: 400;
+    height: 120px;
+    margin: 0;
+  }
+
+  p {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 2.4rem;
+    transform: translateX(50%);
+  }
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.title-search {
+  margin-left: 12px;
+  font-size: 15px;
+  color: var(--white);
+  font-family: 'Source Sans Pro';
+  margin-bottom: 4px;
+}
+
+.input-search {
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  font-size: 140px;
+  color: var(--white);
+  font-family: 'Source Sans Pro';
+
+  &::placeholder {
+    opacity: 0.5;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  color: var(--white);
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.scroll-top {
+  --background-bt: linear-gradient(
+    to bottom,
+    currentColor 0%,
+    currentColor 10%,
+    currentColor 20%,
+    currentColor 35%,
+    transparent 35%,
+    transparent 40%,
+    transparent 50%,
+    transparent 60%,
+    transparent 65%,
+    currentColor 65%,
+    currentColor 80%,
+    currentColor 90%,
+    currentColor 100%
+  );
+  --background-r: linear-gradient(
+    to right,
+    currentColor 0%,
+    currentColor 10%,
+    currentColor 20%,
+    currentColor 35%,
+    transparent 35%,
+    transparent 40%,
+    transparent 50%,
+    transparent 60%,
+    transparent 65%,
+    currentColor 65%,
+    currentColor 80%,
+    currentColor 90%,
+    currentColor 100%
+  );
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  color: #848488;
+  animation: fadeIn 0.4s linear;
+  opacity: 0.6;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+
+    div {
+      inset: -4px;
+      transition: inset 0.2s ease;
+    }
+    i {
+      animation: top 0.4s ease;
+    }
+  }
+
+  div {
+    position: absolute;
+    inset: 0;
+    border-radius: 2px;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--background-bt);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--background-bt);
+    }
+
+    span {
+      position: absolute;
+      display: block;
+      inset: 0;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--background-r);
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--background-r);
+      }
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+@keyframes top {
+  0% {
+    transform: translateY(0) rotate(90deg);
+  }
+  40% {
+    transform: translateY(-14px) rotate(90deg);
+  }
+  41% {
+    transform: translateY(14px) rotate(90deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+// form
+.form {
+  width: 385px;
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+    h1 {
+      font-size: 4.8rem;
+      height: 100px;
+    }
+    p {
+      font-size: 1.8rem;
+    }
+  }
+}

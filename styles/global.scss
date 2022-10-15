@@ -1,0 +1,79 @@
+@import 'normalize.css';
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../assets/fonts/icomoon.ttf');
+}
+
+:root {
+  --layout-width: min(1024px, 100%);
+  --bg-cl: #009298;
+  --text-cl: #000;
+  --white: #fff;
+  --text-sub-cl: #aaaab1;
+  --primary: #d3304d;
+
+  --header-height: 200px;
+  --header-height-m: -200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text-cl);
+  width: 100%;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+button,
+input[type='text'] {
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+  &:focus {
+    box-shadow: 0 0 4px #23f;
+  }
+}
+
+select,
+input[type='text'] {
+  border-radius: 8px;
+  padding: 12px 8px;
+  border: 1px solid #ccc;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: none;
+}

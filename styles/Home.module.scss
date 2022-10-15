@@ -1,0 +1,233 @@
+.wrapper {
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// slogan
+.slogan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--header-height) 40px 120px;
+  margin-top: var(--header-height-m);
+  // background-color: var(--bg-cl);
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/background.svg');
+    background-position: center;
+    background-size: cover;
+    transform: scale(1.1);
+    z-index: -2;
+  }
+}
+
+.slogan-about {
+  position: relative;
+  color: rgba($color: #000, $alpha: 0.6);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding-bottom: 12px;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    margin: 0 8px;
+    background-color: rgba($color: #000, $alpha: 0.3);
+  }
+}
+
+.slogan-title {
+  margin: 0;
+  margin-top: 4px;
+  text-align: center;
+  font-family: 'Merriweather';
+  font-size: 6rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+// latest news
+.latest-news,
+.more-news {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+  min-height: 100px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: no-repeat center url('/latest-news.jpg');
+    z-index: -9;
+  }
+}
+
+.latest-news-title,
+.more-news-title {
+  display: flex;
+  align-items: center;
+  width: var(--layout-width);
+  font-size: 2.4rem;
+  font-family: 'Merriweather';
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+
+  svg {
+    margin-right: 4px;
+    font-size: 36px;
+    color: rgba($color: #fff, $alpha: 0.4);
+  }
+}
+
+.latest-news-time {
+  margin-left: 8px;
+  border-left: 1px solid rgba($color: #fff, $alpha: 0.15);
+  padding-left: 8px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba($color: #fff, $alpha: 0.15);
+}
+
+.latest-news-content,
+.more-news-content {
+  display: flex;
+  width: var(--layout-width);
+  margin-top: 16px;
+}
+
+.latest-news-posts,
+.more-news-posts {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: calc(100% - 320px);
+  min-height: 100px;
+
+  .loading {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.latest-news-popular,
+.more-news-subscribe {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  padding: 0 10px;
+  min-height: 100px;
+}
+
+.ads {
+  width: 300px;
+  height: 600px;
+  background: linear-gradient(transparent, rgba($color: #000, $alpha: 0.1));
+}
+
+// more news
+.more-news {
+  width: 100%;
+  color: #fff;
+
+  &::before {
+    background: none;
+    background-color: #000;
+    top: 0;
+  }
+}
+
+.more-news-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 52px 0;
+}
+
+.more-news-content {
+  height: 600px;
+  margin: 0;
+  margin-top: -32px;
+}
+
+.more-news-subscribe {
+  max-height: 700px;
+  background: linear-gradient(transparent, rgba($color: #000, $alpha: 0.1));
+}
+
+.any-post {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: var(--layout-width);
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 1023px) {
+  .slogan-title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slogan-title {
+    font-size: 2.1rem;
+  }
+  .slogan-about {
+    font-size: 1rem;
+  }
+  .latest-news-content,
+  .more-news-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .latest-news-posts,
+  .more-news-posts {
+    max-width: 100%;
+  }
+  .latest-news-title,
+  .more-news-title {
+    font-size: 1.6rem;
+  }
+  .latest-news-time {
+    font-size: 1rem;
+  }
+  .more-news-content {
+    flex-direction: column-reverse;
+  }
+  .more-news-subscribe {
+    display: none;
+  }
+}

@@ -1,0 +1,22 @@
+.head {
+  padding: 70px 0;
+  font-family: 'Source Sans Pro';
+  font-size: 7rem;
+  font-weight: 700;
+  text-align: center;
+  background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 9;
+
+  a {
+    color: #fff;
+    svg {
+      transition: color 0.4s ease;
+
+      &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+}

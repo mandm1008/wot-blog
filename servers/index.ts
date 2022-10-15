@@ -1,0 +1,8 @@
+export * as SWRServer from './swr'
+export * as PostServer from './post'
+export * as UserServer from './user'
+export * as DeleteServer from './delete'
+export * as FileServer from './file'
+export * as ImageServer from './image'
+export * as CommentServer from './comment'
+export * as CategoryServer from './category'

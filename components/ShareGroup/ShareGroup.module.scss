@@ -1,0 +1,28 @@
+.share-group {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  font-size: 3rem;
+  color: rgba(53, 53, 218, 0.8);
+
+  .share-icon:hover {
+    color: rgb(3, 3, 173);
+    transition: color 0.2s linear;
+    cursor: pointer;
+  }
+
+  .share-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & ~ .share-icon {
+      margin-left: 20px;
+    }
+  }
+}

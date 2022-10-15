@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  font-family: 'Source Sans Pro';
+  font-size: 1.6rem;
+  font-weight: 700;
+  vertical-align: middle;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  a[href] {
+    border-bottom: 2px dashed transparent;
+
+    &:hover {
+      color: #1a0dab;
+      border-bottom: 2px dashed currentColor;
+    }
+  }
+
+  span {
+    padding: 0 8px;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 4px;
+}

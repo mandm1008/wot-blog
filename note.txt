@@ -1,0 +1,47 @@
+1. edit mongoose/types/models.d.ts
+line 341
+    /** Add methods */
+    findDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      projection?: ProjectionType<T> | null | undefined,
+      options?: QueryOptions<T> | null | undefined,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      projection?: ProjectionType<T> | null | undefined,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+
+    findWithDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      projection?: ProjectionType<T> | null | undefined,
+      options?: QueryOptions<T> | null | undefined,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findWithDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      projection?: ProjectionType<T> | null | undefined,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findWithDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      filter: FilterQuery<T>,
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+    findWithDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(
+      callback?: Callback<ResultDoc[]> | undefined
+    ): QueryWithHelpers<Array<ResultDoc>, ResultDoc, TQueryHelpers, T>;
+
+    findOneWithDeleted<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(filter: FilterQuery<T>, options?: QueryOptions<T> | null, callback?: (err: CallbackError, doc: ResultDoc | null, res: any) => void): QueryWithHelpers<ResultDoc | null, ResultDoc, TQueryHelpers, T>;
+    delete<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(filter: FilterQuery<T>, options?: QueryOptions<T> | null, callback?: (err: CallbackError, doc: ResultDoc | null, res: any) => void): Promise<void>;
+    restore<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(filter: FilterQuery<T>, options?: QueryOptions<T> | null, callback?: (err: CallbackError, doc: ResultDoc | null, res: any) => void): Promise<void>;
+
+
+<-- ----------------------------------------------------- -->

@@ -1,0 +1,37 @@
+.icon {
+  text-transform: none;
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.share::before {
+  content: '\e91a';
+}
+
+.search::before {
+  content: '\e922';
+}
+
+.user::before {
+  content: '\e920';
+}
+
+.close::before {
+  content: '\e908';
+}
+
+.arrow-left::before {
+  content: '\e902';
+}
+
+.arrow-right::before {
+  content: '\e903';
+}
+
+.arrow-top {
+  transform: rotate(90deg);
+}

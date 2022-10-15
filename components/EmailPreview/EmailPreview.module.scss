@@ -1,0 +1,17 @@
+.wrapper {
+  margin: 32px;
+
+  * {
+    box-sizing: content-box;
+    word-wrap: break-word;
+  }
+
+  & > div {
+    width: 100% !important;
+    border-radius: 12px !important;
+
+    & > div {
+      max-width: 790px !important;
+    }
+  }
+}

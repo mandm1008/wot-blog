@@ -1,0 +1,41 @@
+.wrapper {
+  padding: 8px 0;
+}
+
+.title {
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid #999999;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.item {
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: rgb(23, 50, 255);
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  z-index: 2;
+
+  & ~ .item {
+    margin-left: 8px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

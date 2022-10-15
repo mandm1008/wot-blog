@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 12px;
+  margin-bottom: 12px;
+  overflow-y: hidden;
+  transition: padding 0.4s linear;
+  animation: height 0.4s ease-in;
+
+  img {
+    border-radius: 50%;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+    font-family: 'Merriweather';
+    font-weight: 700;
+
+    span {
+      color: var(--primary);
+      text-decoration: underline;
+      opacity: 0.8;
+      transition: opacity 0.2s linear;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .input {
+    position: relative;
+    flex: 1;
+    margin-left: 12px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.4s ease-in-out;
+    }
+
+    &:focus-within {
+      &::after {
+        width: 100%;
+      }
+    }
+
+    .controls {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+    }
+
+    .hidden {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 0 16px;
+    padding-right: 32px;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+@keyframes height {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

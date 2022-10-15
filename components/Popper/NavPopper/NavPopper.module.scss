@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 0 4px #0000004d;
+  padding-top: 4px;
+  margin-top: -16px;
+  --radius: 4px;
+  border-radius: var(--radius);
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: 0;
+    left: 0;
+    margin-top: -16px;
+    background-color: var(--cl);
+    animation: width 0.5s linear;
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+  }
+}
+
+@keyframes width {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

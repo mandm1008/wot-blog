@@ -1,0 +1,102 @@
+.wrapper {
+  width: calc(100% - 40px);
+  margin: 20px;
+  padding: 4px;
+  border-radius: 8px;
+  color: #000;
+  background-color: #fff;
+
+  img {
+    cursor: pointer;
+  }
+}
+
+.upload {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  min-height: 276px;
+
+  .image {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 92px;
+    height: 57px;
+    margin: 0 4px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba($color: #000, $alpha: 0.4);
+
+    h6 {
+      position: absolute;
+      top: 100%;
+      margin-top: 2px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.2s linear;
+    }
+
+    .copy {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      inset: 0;
+      font-size: 2rem;
+      color: #fff;
+      background-color: rgba($color: #000, $alpha: 0.4);
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .copy.active {
+        display: flex;
+      }
+      h6 {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-family: 'Merriweather';
+  font-weight: 900;
+  user-select: none;
+  z-index: 9;
+
+  .icon {
+    margin: 0 6px;
+    padding: 8px;
+    border-radius: 8px;
+    box-sizing: content-box;
+    background-color: rgba($color: #000, $alpha: 0.1);
+    transition: background-color 0.2s linear;
+    z-index: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($color: #000, $alpha: 0.2);
+    }
+
+    &.disable {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.wrapper {
+  width: 100%;
+
+  .title {
+    width: 100%;
+    font-family: 'Merriweather';
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #0c0c17;
+    text-align: left;
+  }
+
+  .content {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+
+    .loading {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .content {
+      flex-wrap: wrap;
+    }
+  }
+}

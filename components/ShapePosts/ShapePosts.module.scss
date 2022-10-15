@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: var(--layout-width);
+}
+
+.ads {
+  margin-bottom: 12px;
+}

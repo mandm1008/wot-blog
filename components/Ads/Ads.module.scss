@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  height: 600px;
+  background: linear-gradient(transparent, rgba($color: #000, $alpha: 0.1));
+}
