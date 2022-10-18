@@ -8,7 +8,7 @@ import { useStore } from '../store'
 
 const cx = classNames.bind(styles)
 
-function ShapePosts({ data = [], i }: { data: Models.Post[]; i: number }) {
+function ShapePosts({ data = [], i }: { data: Apis.PostWithCategory[]; i: number }) {
   const [{ layout }] = useStore()
 
   return (

@@ -12,7 +12,7 @@ import { SWRServer } from '~/servers'
 const cx = classNames.bind(styles)
 
 function MostShare() {
-  const { error, data } = useSWR<Models.Post[]>('/api/data/posts/most?type=share', SWRServer.fetcher)
+  const { error, data } = useSWR<Apis.ApiPost.ResMost>('/api/data/posts/most?type=share', SWRServer.fetcher)
 
   return (
     <div className={cx('wrapper')}>

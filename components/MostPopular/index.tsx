@@ -9,7 +9,10 @@ const cx = classNames.bind(styles)
 
 function MostPopular() {
   const [mode, setMode] = useState<Apis.ModePopularPost>('week')
-  const { error, data } = useSWR<Models.Post[]>(`/api/data/posts/most?mode=${mode}&type=popular`, SWRServer.fetcher)
+  const { error, data } = useSWR<Apis.ApiPost.ResMost>(
+    `/api/data/posts/most?mode=${mode}&type=popular`,
+    SWRServer.fetcher
+  )
 
   return (
     <div className={cx('wrapper')}>

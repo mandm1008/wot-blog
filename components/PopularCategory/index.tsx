@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 
 function PopularCategory({ categories = [] }: { categories: Models.Category[] }) {
   const [mode, setMode] = useState(categories[0] || {})
-  const { error, data } = useSWR<Models.Post[]>(
+  const { error, data } = useSWR<Apis.ApiPost.ResMost>(
     `/api/data/posts/most?category=${encodeURIComponent(JSON.stringify(mode || 'null'))}&type=popular`,
     SWRServer.fetcher
   )
