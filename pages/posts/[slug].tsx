@@ -90,7 +90,7 @@ function Post({ data = '{}' }) {
             description: post.subTitle,
             images: [
               {
-                url: post.banner || '/logo2.png',
+                url: post.banner || '/logo.png',
                 alt: post.title,
                 width: 800,
                 height: 600

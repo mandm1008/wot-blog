@@ -3,7 +3,7 @@ import { server } from './constants'
 
 const instance = axios.create({
   baseURL: server + '/api/',
-  timeout: 5000,
+  timeout: 10000,
   timeoutErrorMessage: 'Network connection timeout!',
   transformRequest: (data) => JSON.stringify(data),
   transformResponse: (data) => {

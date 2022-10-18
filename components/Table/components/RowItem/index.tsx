@@ -2,12 +2,12 @@ import { useState, forwardRef, useEffect } from 'react'
 import classNames from 'classnames/bind'
 
 import styles from './RowItem.module.scss'
-import Link from '../../../Link'
+import Link from '~/components/Link'
 
 const cx = classNames.bind(styles)
 
 export type OptionsRowItem = {
-  link?: boolean
+  link?: (path: string, slug: string) => string
 }
 export type TypeRowItem = 'text' | 'list' | 'time' | 'input' | 'color'
 
@@ -88,7 +88,7 @@ function RowItem({ data = {}, name, type, options = {}, path, ...rest }: Props, 
 
   if (options.link) {
     Tag = Link
-    props.href = `/${path}/${data.slug}`
+    props.href = options.link(path, data.slug)
   }
 
   return (

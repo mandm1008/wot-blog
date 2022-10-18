@@ -74,7 +74,7 @@ function Navbar({ top, isTopNav, openSearch = () => {}, openLogin = () => {}, op
       {top && (
         <Link href="/" className={cx('logo')}>
           <Image
-            src="/logo2.png"
+            src="/logo.png"
             alt="writeortalk.com"
             width={50}
             height={50}

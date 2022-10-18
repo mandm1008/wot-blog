@@ -27,7 +27,7 @@ function ResetPasswordPage({ error, user = '{}', email }: { error?: string; emai
     <Wrapper
       Head={
         <Head>
-          <title>Reset Password: {data.name}</title>
+          <title>{`Reset Password: ${data.name}`}</title>
         </Head>
       }
       Content={

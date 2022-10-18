@@ -268,7 +268,20 @@ declare namespace Apis {
 
     interface ReqEdit {
       _id: string
+      name: string
+      title: string
       content: string
+    }
+
+    interface ReqSend extends Query {
+      _id: string
+    }
+
+    interface ReqCopy {
+      _id: string
+    }
+    interface ResCopy {
+      data: Vi_Hi<Models.Email[]>
     }
   }
 }

@@ -2,10 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import { sign } from 'jsonwebtoken'
 import CryptoJS from 'crypto-js'
-import { connect } from '../../../../config/db'
-import User from '../../../../models/User'
-import { sendResetPasswordEmail, EmailData } from '../../../../config/mailer'
-import { handleError } from '../../../../tools/middleware'
+import { connect } from '~/config/db'
+import User from '~/models/User'
+import { sendResetPasswordEmail, EmailData } from '~/config/mailer'
+import { handleError } from '~/tools/middleware'
 
 interface Request extends NextApiRequest {
   body: Apis.ApiUser.ReqResetPassword

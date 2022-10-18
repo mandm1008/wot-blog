@@ -1,9 +1,9 @@
 import nc from 'next-connect'
 import { sign } from 'jsonwebtoken'
 import { OAuth2Client } from 'google-auth-library'
-import { connect } from '../../../config/db'
-import User from '../../../models/User'
-import { handleError } from '../../../tools/middleware'
+import { connect } from '~/config/db'
+import User from '~/models/User'
+import { handleError } from '~/tools/middleware'
 
 export default nc({
   onError: handleError

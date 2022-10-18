@@ -97,7 +97,6 @@ function Header(props: any, ref: any) {
       <Link href="/" className={cx('logo')}>
         <h1>Write Or Talk</h1>
         <p>We&apos;re copywriter</p>
-        {/* <Image src="/logo.svg" alt="WoT Blog" width={600} height={200} /> */}
       </Link>
 
       {layout === 3 && <Navbar openSearch={openSearch} openLogin={openLogin} openRegister={openRegister} />}

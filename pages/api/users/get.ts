@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import { sign } from 'jsonwebtoken'
 import cookie from 'cookie'
-import { connect } from '../../../config/db'
-import { verifyToken, handleError, RequestVerify } from '../../../tools/middleware'
-import User from '../../../models/User'
+import { connect } from '~/config/db'
+import { verifyToken, handleError, RequestVerify } from '~/tools/middleware'
+import User from '~/models/User'
 
 interface Request extends NextApiRequest, RequestVerify {}
 

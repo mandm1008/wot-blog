@@ -1,4 +1,5 @@
 import { connect } from '~/config/db'
+import { toObject } from '.'
 import User from '~/models/User'
 
 export async function pushUserToComments(comments: Apis.CommentWithUser[]): Promise<Apis.CommentWithUser[]> {
@@ -9,4 +10,12 @@ export async function pushUserToComments(comments: Apis.CommentWithUser[]): Prom
   }
 
   return comments
+}
+
+export async function getAllEmailOfUser() {
+  await connect()
+
+  const users = toObject<Models.User>(await User.find({}))
+
+  return users.map<string>((user) => user.email)
 }

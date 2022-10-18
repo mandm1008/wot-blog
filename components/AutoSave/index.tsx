@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { formatContentHTML } from '~/tools'
 import { BsFillCloudCheckFill, BsFillCloudSlashFill } from 'react-icons/bs'
 import { Editor } from 'tinymce'
-import { PostServer } from '~/servers'
+import { ContentServer } from '~/servers'
 
 const style = { marginLeft: '32px', fontSize: '32px', color: 'var(--primary)', display: 'flex', alignItems: 'center' }
 
@@ -30,7 +30,7 @@ function AutoSave({
           }
 
           if (body.content && body.content !== oldContent) {
-            const res = await PostServer.autoSave(body)
+            const res = await ContentServer.autoSave(body)
 
             if (res.error) {
               toast.error('Auto save failed!')

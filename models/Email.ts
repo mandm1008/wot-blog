@@ -5,8 +5,9 @@ import mongooseDelete from 'mongoose-delete'
 const Email = new Schema(
   {
     name: { type: String, required: true },
+    title: String,
     content: String,
-    sended: { type: Array, default: [] },
+    sended: String,
     slug: { type: String, slug: 'name', unique: true }
   },
   { timestamps: true }

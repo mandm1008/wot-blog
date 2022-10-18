@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import fs from 'fs/promises'
 import path from 'path'
-import { connect } from '../../../config/db'
-import File from '../../../models/File'
-import { verifyTokenAndAdmin, handleError } from '../../../tools/middleware'
-import { sort, toObject } from '../../../tools'
-import { STORE_FILES_PATH } from '../../../config/constants'
+import { connect } from '~/config/db'
+import File from '~/models/File'
+import { verifyTokenAndAdmin, handleError } from '~/tools/middleware'
+import { sort, toObject } from '~/tools'
+import { STORE_FILES_PATH } from '~/config/constants'
 
 interface RequestGet extends NextApiRequest {
   query: Apis.ApiFiles.ReqGetFiles

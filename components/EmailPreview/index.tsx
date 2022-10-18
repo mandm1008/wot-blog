@@ -6,18 +6,24 @@ import { EmailLayout } from '~/config/constants'
 
 const cx = classNames.bind(styles)
 
-function EmailPreview({ editorRef }: { editorRef: React.MutableRefObject<React.MutableRefObject<Editor>> }) {
+function EmailPreview({
+  editorRef,
+  body
+}: {
+  editorRef?: React.MutableRefObject<React.MutableRefObject<Editor>>
+  body?: string
+}) {
   const [content, setContent] = useState('')
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setContent(editorRef.current.current.getContent())
+      editorRef && setContent(editorRef.current.current.getContent())
     }, 5000)
 
     return () => clearInterval(interval)
   }, [editorRef])
 
-  return <div className={cx('wrapper')} dangerouslySetInnerHTML={{ __html: EmailLayout(content) }}></div>
+  return <div className={cx('wrapper')} dangerouslySetInnerHTML={{ __html: EmailLayout(body || content) }}></div>
 }
 
 export default EmailPreview

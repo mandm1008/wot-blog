@@ -18,7 +18,7 @@ import { UploadImages, UploadFiles } from '~/components/Upload'
 import AutoSave from '~/components/AutoSave'
 import Timer from '~/components/Timer'
 import { formatContentHTML } from '~/tools'
-import { PostServer } from '~/servers'
+import { PostServer, ContentServer } from '~/servers'
 
 const cx = classNames.bind(styles)
 
@@ -60,7 +60,7 @@ function EditPost({
     }
 
     toast.loading('Updating...', { id: 'update' })
-    await PostServer.autoSave({ id: body._id, content: body.content })
+    await ContentServer.autoSave({ id: body._id, content: body.content })
 
     const response = await PostServer.edit(body)
 

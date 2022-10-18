@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import { connect } from '../../../config/db'
-import { verifyToken, handleError, RequestVerify } from '../../../tools/middleware'
-import User from '../../../models/User'
+import { connect } from '~/config/db'
+import { verifyToken, handleError, RequestVerify } from '~/tools/middleware'
+import User from '~/models/User'
 
 interface Request extends NextApiRequest, RequestVerify {
   body: Apis.ApiUser.ReqEdit

@@ -16,11 +16,11 @@ function Posts({ posts }: { posts: string }) {
   const [hiddenPosts, setHiddenPosts] = useState(post.hidden)
 
   const fields: Field[] = [
-    { name: 'title', type: 'text', options: { link: true } },
+    { name: 'title', type: 'text', options: { link: (path, slug) => `/${path}/${slug}` } },
     { name: 'categories', type: 'list' },
     { name: 'createdAt', as: 'create time', type: 'time' },
     { name: 'updatedAt', as: 'update time', type: 'time' },
-    { name: 'postedAt', as: 'post time', type: 'time' },
+    { name: 'postedAt', as: 'post time', type: 'time' }
   ]
 
   function handleHidden({ ids, error }: Apis.ApiPost.ResDelete & Apis.Error) {

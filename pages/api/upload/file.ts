@@ -2,9 +2,9 @@ import nc from 'next-connect'
 import fs from 'fs/promises'
 import formidable from 'formidable'
 import path from 'path'
-import File from '../../../models/File'
-import { verifyTokenAndAdmin, handleError } from '../../../tools/middleware'
-import { STORE_FILES_PATH, FILE_DOMAIN } from '../../../config/constants'
+import File from '~/models/File'
+import { verifyTokenAndAdmin, handleError } from '~/tools/middleware'
+import { STORE_FILES_PATH, FILE_DOMAIN } from '~/config/constants'
 
 export default nc({
   onError: handleError

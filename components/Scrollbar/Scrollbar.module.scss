@@ -11,10 +11,9 @@
   cursor: pointer;
   z-index: 999;
 
-  &.visible,
-  &:hover {
-    opacity: 1;
-    transform: translateX(0);
+  &.visible {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
   }
 }
 

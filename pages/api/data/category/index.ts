@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import { getCategoryBySlug } from '../../../../tools/category'
-import { handleError } from '../../../../tools/middleware'
+import { getCategoryBySlug } from '~/tools/category'
+import { handleError } from '~/tools/middleware'
 
 interface Request extends NextApiRequest {
   query: Apis.ApiCategory.ReqGetCategory

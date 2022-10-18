@@ -93,7 +93,7 @@ export const sendNotificationEmail = ({
 }: {
   subject: string
   content: string
-  users: Models.User[]
+  users: string[]
 }) => {
   const message: SendMailOptions = {
     from,

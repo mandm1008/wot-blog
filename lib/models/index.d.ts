@@ -29,8 +29,9 @@ declare namespace Models {
 
   interface Email extends Model {
     name: string
-    content: string
-    sended: string[]
+    title?: string
+    content?: string
+    sended?: string
     slug: string
   }
 

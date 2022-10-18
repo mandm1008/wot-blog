@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import { connect } from '../../config/db'
-import Category from '../../models/Category'
-import { handleError, verifyTokenAndAdmin } from '../../tools/middleware'
+import { connect } from '~/config/db'
+import Category from '~/models/Category'
+import { handleError, verifyTokenAndAdmin } from '~/tools/middleware'
 
 interface RequestCreate extends NextApiRequest {
   body: Apis.ApiCategory.ReqCreate

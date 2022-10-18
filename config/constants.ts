@@ -12,7 +12,7 @@ export const EmailLayout = (content: string) => `
   <div style="background-color: #fff; margin: 20px auto; border-radius: 8px;">
     <div
       style="display: flex; justify-content: center; align-items: center; padding: 12px; width: calc(100% - 24px); user-select: none; color: #000; background-color: rgb(3, 3, 170); border-top-left-radius: 8px; border-top-right-radius: 8px; background-image: url('https://writeortalk.com/background-email.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover;">
-      <img src="https://writeortalk.com/logo2.png" alt="Write or Talk Blog" style="width: 100px; margin: auto;" />
+      <img src="https://writeortalk.com/logo.png" alt="Write or Talk Blog" style="width: 100px; margin: auto;" />
     </div>
     <div style="padding: 12px 16px; font-family: 'Source Sans Pro',sans-serif; font-size: 16px;">
       ${content}

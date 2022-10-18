@@ -1,5 +1,5 @@
 import { useState, useRef, memo } from 'react'
-import { useBrowserLayoutEffect } from '../../hooks'
+import { useBrowserLayoutEffect } from '~/hooks'
 import toast from 'react-hot-toast'
 import classNames from 'classnames/bind'
 
@@ -9,6 +9,7 @@ import Button from '../Button'
 import RowItem, { TypeRowItem, OptionsRowItem } from './components/RowItem'
 import { DeleteServer } from '~/servers'
 import { FiEdit, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FaRegCopy } from 'react-icons/fa'
 
 const cx = classNames.bind(styles)
 
@@ -35,9 +36,10 @@ interface Props {
   path: string
   save?: (id: string, title: string, color?: string) => Promise<any>
   edit?: boolean
+  copy?: (id: string) => Promise<any>
 }
 
-function Table({ fields = [], data = [], actions = [], path, save, edit }: Props) {
+function Table({ fields = [], data = [], actions = [], path, save, edit, copy }: Props) {
   const [list, setList] = useState(data)
   const [page, setPage] = useState(0)
   const [checkValue, setCheckValue] = useState({
@@ -214,6 +216,12 @@ function Table({ fields = [], data = [], actions = [], path, save, edit }: Props
                 >
                   Save
                 </Button>
+              )}
+
+              {copy && (
+                <span onClick={() => copy(item._id)} className={cx('edit')}>
+                  <FaRegCopy />
+                </span>
               )}
             </div>
           </li>

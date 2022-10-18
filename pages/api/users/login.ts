@@ -3,9 +3,9 @@ import nc from 'next-connect'
 import { sign } from 'jsonwebtoken'
 import cookie from 'cookie'
 import { compare } from 'bcrypt'
-import { connect } from '../../../config/db'
-import User from '../../../models/User'
-import { handleError } from '../../../tools/middleware'
+import { connect } from '~/config/db'
+import User from '~/models/User'
+import { handleError } from '~/tools/middleware'
 
 interface Request extends NextApiRequest {
   body: Apis.ApiUser.ReqLogin

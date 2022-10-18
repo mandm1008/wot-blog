@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next'
 import nc from 'next-connect'
 import cookie from 'cookie'
-import { handleError } from '../../../tools/middleware'
+import { handleError } from '~/tools/middleware'
 
 export default nc({
   onError: handleError

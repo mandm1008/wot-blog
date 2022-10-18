@@ -55,7 +55,7 @@ function Menu({ openLogin = () => {}, openRegister = () => {} }: { openLogin: ()
   return (
     <div className={cx('wrapper')}>
       <Link href="/" className={cx('logo')}>
-        <Image src="/logo2.png" alt="WoT Blog" width={50} height={50} objectFit="contain" objectPosition="center" />
+        <Image src="/logo.png" alt="WoT Blog" width={50} height={50} objectFit="contain" objectPosition="center" />
       </Link>
       <div className={cx('ctn')}>
         <div

@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import CryptoJS from 'crypto-js'
 import { genSalt, hash } from 'bcrypt'
-import { asyncVerify, handleError } from '../../../../tools/middleware'
-import { connect } from '../../../../config/db'
-import User from '../../../../models/User'
+import { asyncVerify, handleError } from '~/tools/middleware'
+import { connect } from '~/config/db'
+import User from '~/models/User'
 
 interface Request extends NextApiRequest {
   body: Apis.ApiUser.ReqResetPasswordActions

@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import Comment from '../../models/Comment'
-import Post from '../../models/Post'
-import { connect } from '../../config/db'
-import { pushUserToComments } from '../../tools/user'
-import { sort, toObject } from '../../tools'
-import { handleError, verifyToken, RequestVerify } from '../../tools/middleware'
+import Comment from '~/models/Comment'
+import Post from '~/models/Post'
+import { connect } from '~/config/db'
+import { pushUserToComments } from '~/tools/user'
+import { sort, toObject } from '~/tools'
+import { handleError, verifyToken, RequestVerify } from '~/tools/middleware'
 
 interface RequestGet extends NextApiRequest {
   query: Apis.ApiComment.ReqGet

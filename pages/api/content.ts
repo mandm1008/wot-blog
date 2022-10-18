@@ -1,7 +1,7 @@
 import nc from 'next-connect'
-import { connect } from '../../config/db'
-import { handleError, verifyTokenAndAdmin, RequestVerify } from '../../tools/middleware'
-import Content from '../../models/Content'
+import { connect } from '~/config/db'
+import { handleError, verifyTokenAndAdmin, RequestVerify } from '~/tools/middleware'
+import Content from '~/models/Content'
 
 interface Request extends RequestVerify {
   body: Apis.ApiContent.ReqEdit

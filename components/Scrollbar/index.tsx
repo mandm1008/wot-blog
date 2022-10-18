@@ -9,19 +9,19 @@ function Scrollbar() {
   const [visible, setVisible] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const element = useRef<HTMLDivElement>()
+  const timeout = useRef<NodeJS.Timeout>()
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined
     function handler() {
       setVisible(true)
       setScrollTop(window.scrollY / (window.document.body.scrollHeight - window.innerHeight))
 
-      if (timeout) {
-        clearTimeout(timeout)
-        timeout = undefined
+      if (timeout.current) {
+        clearTimeout(timeout.current)
+        timeout.current = undefined
       }
 
-      timeout = setTimeout(() => {
+      timeout.current = setTimeout(() => {
         setVisible(false)
       }, 1000)
     }
@@ -33,6 +33,7 @@ function Scrollbar() {
   useEffect(() => {
     const divElement = element.current
     function handler(e: React.MouseEvent<HTMLDivElement>) {
+      clearTimeout(timeout.current)
       setVisible(true)
       const percents = e.clientY / window.innerHeight
 
@@ -40,6 +41,7 @@ function Scrollbar() {
     }
 
     function handleDown(e: React.MouseEvent<HTMLDivElement>) {
+      clearTimeout(timeout.current)
       handler(e)
       window.document.body.style.userSelect = 'none'
       window.document.querySelector('html')!.style.scrollBehavior = 'auto'
@@ -58,9 +60,24 @@ function Scrollbar() {
     return () => divElement?.removeEventListener('mousedown', handleDown as any)
   }, [])
 
+  function handleHover() {
+    element.current!.style.opacity = '1'
+    element.current!.style.transform = 'translateX(0)'
+  }
+
+  function handleLeave() {
+    element.current!.style.opacity = '0'
+    element.current!.style.transform = 'translateX(100%)'
+  }
+
   return (
     <div ref={element as React.LegacyRef<HTMLDivElement>} className={cx('wrapper', { visible })}>
-      <div className={cx('inner')} style={{ top: `${scrollTop * 100}%` }}>
+      <div
+        className={cx('inner')}
+        style={{ top: `${scrollTop * 100}%` }}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleLeave}
+      >
         <CgMenuGridO />
       </div>
     </div>

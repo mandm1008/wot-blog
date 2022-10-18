@@ -3,10 +3,10 @@ import nc from 'next-connect'
 import { genSalt, hash } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import CryptoJS from 'crypto-js'
-import { connect } from '../../../config/db'
-import { sendConfirmationEmail } from '../../../config/mailer'
-import { handleError } from '../../../tools/middleware'
-import User from '../../../models/User'
+import { connect } from '~/config/db'
+import { sendConfirmationEmail } from '~/config/mailer'
+import { handleError } from '~/tools/middleware'
+import User from '~/models/User'
 
 interface Request extends NextApiRequest {
   body: Apis.ApiUser.ReqCreate
@@ -46,7 +46,7 @@ export default nc({
   const encrypt = CryptoJS.AES.encrypt(activeAccountToken + '/' + user.email, process.env.ENCRYPT_SECRET_KEY || '')
 
   try {
-    console.log(await sendConfirmationEmail({ toUser: user.toObject(), hash: encrypt }))
+    await sendConfirmationEmail({ toUser: user.toObject(), hash: encrypt })
   } catch (e) {
     return res.status(403).json({ error: 'Send confirmation email failed!' })
   }

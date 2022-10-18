@@ -74,7 +74,7 @@ function Home() {
             "Always Learning, Always Effort. You're better when you believed. Welcome To Copywriting Community",
           images: [
             {
-              url: `${server}/logo2.png`,
+              url: `${server}/logo.png`,
               alt: 'Logo WoT Blog',
               width: 800,
               height: 600

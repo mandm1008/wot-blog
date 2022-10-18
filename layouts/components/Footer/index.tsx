@@ -19,7 +19,7 @@ function Footer() {
         </Link>
         <Link href="/" className={cx('item', 'main-item')}>
           <Image
-            src="/logo2.png"
+            src="/logo.png"
             alt="writeortalk.com"
             width={50}
             height={50}

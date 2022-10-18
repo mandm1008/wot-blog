@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import { connect } from '../../config/db'
-import { verifyTokenAndAdmin, handleError, RequestVerify } from '../../tools/middleware'
-import Post from '../../models/Post'
-import Content from '../../models/Content'
+import { connect } from '~/config/db'
+import { verifyTokenAndAdmin, handleError, RequestVerify } from '~/tools/middleware'
+import Post from '~/models/Post'
+import Content from '~/models/Content'
 
 interface RequestInteractive extends NextApiRequest {
   query: Apis.ApiPost.ReqInteractive

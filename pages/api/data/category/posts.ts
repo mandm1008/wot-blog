@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
-import { sort } from '../../../../tools'
-import { handleError } from '../../../../tools/middleware'
-import { getPostsByCategory } from '../../../../tools/post'
-import { getCategoriesWithPosts } from '../../../../tools/category'
+import { sort } from '~/tools'
+import { handleError } from '~/tools/middleware'
+import { getPostsByCategory } from '~/tools/post'
+import { getCategoriesWithPosts } from '~/tools/category'
 
 interface Request extends NextApiRequest {
   query: Apis.ApiCategory.ReqGetPosts

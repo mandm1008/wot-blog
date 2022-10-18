@@ -2,10 +2,10 @@ import { NextApiRequest } from 'next'
 import nc from 'next-connect'
 import { sign } from 'jsonwebtoken'
 import CryptoJS from 'crypto-js'
-import { connect } from '../../../config/db'
-import { sendConfirmationEmail } from '../../../config/mailer'
-import { handleError } from '../../../tools/middleware'
-import User from '../../../models/User'
+import { connect } from '~/config/db'
+import { sendConfirmationEmail } from '~/config/mailer'
+import { handleError } from '~/tools/middleware'
+import User from '~/models/User'
 
 interface Request extends NextApiRequest {
   query: Apis.ApiUser.ReqActive
