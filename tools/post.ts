@@ -118,3 +118,10 @@ export async function getContentForPostAdmin(id: string): Promise<string> {
 
   return content.content
 }
+
+export function removeContentOfPost<T = Apis.PostWithCategory>(data: (T & Apis.PostWithCategory)[] = []): T[] {
+  return data.map((item) => {
+    item.content = ''
+    return item
+  })
+}

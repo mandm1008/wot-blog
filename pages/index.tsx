@@ -169,11 +169,11 @@ function Page({ data }: { data: Apis.ListData }) {
 
 import { GetStaticProps } from 'next'
 import { getCategoriesWithPosts } from '~/tools/category'
-import { getTopPosts, getNewPosts } from '~/tools/post'
+import { getTopPosts, getNewPosts, removeContentOfPost } from '~/tools/post'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const topPosts = await getCategoriesWithPosts(await getTopPosts(9))
-  const newPosts = await getCategoriesWithPosts(await getNewPosts(5))
+  const topPosts = removeContentOfPost(await getCategoriesWithPosts(await getTopPosts(9)))
+  const newPosts = removeContentOfPost(await getCategoriesWithPosts(await getNewPosts(5)))
 
   return {
     props: {

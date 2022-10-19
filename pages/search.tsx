@@ -127,7 +127,7 @@ function Search({ data = '[]', total }: { data: string; total: number }) {
 
 import { GetServerSideProps } from 'next'
 import { getCategoriesWithPosts } from '~/tools/category'
-import { getPostsForSearch } from '~/tools/post'
+import { getPostsForSearch, removeContentOfPost } from '~/tools/post'
 import { sort, sortByQ } from '~/tools'
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -160,7 +160,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      data: JSON.stringify(posts),
+      data: JSON.stringify(removeContentOfPost(posts)),
       total
     }
   }

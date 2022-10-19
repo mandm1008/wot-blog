@@ -2,6 +2,7 @@ import { NextApiResponse } from 'next'
 import nc from 'next-connect'
 import { connect } from '~/config/db'
 import { filterPostWithPostedTime } from '~/tools'
+import { removeContentOfPost } from '~/tools/post'
 import { handleError } from '~/tools/middleware'
 import Category from '~/models/Category'
 import Post from '~/models/Post'
@@ -12,7 +13,9 @@ export default nc({
   await connect()
 
   const categories: Models.Category[] = (await Category.find({})).map((item) => item.toObject())
-  const posts: Models.Post[] = filterPostWithPostedTime((await Post.find({})).map((item) => item.toObject()))
+  const posts: Models.Post[] = removeContentOfPost(
+    filterPostWithPostedTime((await Post.find({})).map((item) => item.toObject())) as any
+  )
 
   const data = categories.map((category) => ({
     ...category,

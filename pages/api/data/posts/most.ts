@@ -4,6 +4,7 @@ import { connect } from '~/config/db'
 import Post from '~/models/Post'
 import { getCategoriesWithPosts } from '~/tools/category'
 import { handleError } from '~/tools/middleware'
+import { removeContentOfPost } from '~/tools/post'
 import { sort, filterPostWithPostedTime } from '~/tools'
 
 interface Request extends NextApiRequest {
@@ -56,5 +57,5 @@ export default nc({
     posts = posts.slice(0, 3)
   }
 
-  res.status(200).json(posts)
+  res.status(200).json(removeContentOfPost(posts))
 })

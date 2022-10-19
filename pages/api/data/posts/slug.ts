@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import { connect } from '~/config/db'
 import { filterPostWithPostedTime } from '~/tools'
+import { removeContentOfPost } from '~/tools/post'
 import { handleError } from '~/tools/middleware'
 import Post from '~/models/Post'
 
@@ -22,5 +23,5 @@ export default nc({
   else if (index >= posts.length - 1) post = [posts[posts.length - 2], posts[posts.length - 1], posts[0]]
   else post = [posts[index - 1], posts[index], posts[index + 1]]
 
-  res.status(200).json(post)
+  res.status(200).json(removeContentOfPost(post as any))
 })

@@ -3,7 +3,7 @@ import nc from 'next-connect'
 import { connect } from '~/config/db'
 import Post from '~/models/Post'
 import { sort, filterPostWithPostedTime } from '~/tools'
-import { getNewPosts } from '~/tools/post'
+import { getNewPosts, removeContentOfPost } from '~/tools/post'
 import { handleError } from '~/tools/middleware'
 import { getCategoriesWithPosts } from '~/tools/category'
 
@@ -39,7 +39,7 @@ export default nc({
   const totalPages = Math.ceil(total / 6)
 
   res.status(200).json({
-    morePosts: results,
+    morePosts: removeContentOfPost(results),
     total: total > 0 ? total : 0,
     totalPages: totalPages > 0 ? totalPages : 0
   })

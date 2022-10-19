@@ -2,12 +2,15 @@ export const getTime = (str: string | undefined) => {
   if (!str) return ''
 
   const time = new Date(+new Date() - +new Date(str))
+  const month = time.getMonth()
   const d = time.getDate() - 1
   const h = time.getHours() - 8
   const m = time.getMinutes()
   let children
 
-  if (d > 0) {
+  if (month > 0) {
+    children = ddmmyyyy(str)
+  } else if (d > 0) {
     children = d + 'd ago'
   } else if (h > 0) {
     children = `${h}h ${m}m ago`

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import nc from 'next-connect'
 import { sort } from '~/tools'
 import { handleError } from '~/tools/middleware'
-import { getPostsByCategory } from '~/tools/post'
+import { getPostsByCategory, removeContentOfPost } from '~/tools/post'
 import { getCategoriesWithPosts } from '~/tools/category'
 
 interface Request extends NextApiRequest {
@@ -34,7 +34,7 @@ export default nc({
   const totalPages = Math.ceil(total / 10)
 
   res.status(200).json({
-    posts: await getCategoriesWithPosts(data),
+    posts: removeContentOfPost(await getCategoriesWithPosts(data)),
     totalPages: totalPages > 0 ? totalPages : 0,
     total: total > 0 ? total : 0
   })
