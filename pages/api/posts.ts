@@ -18,8 +18,8 @@ interface RequestEdit extends RequestVerify {
 }
 
 interface RequestDelete extends RequestVerify {
-  query: Apis.ApiPost.ReqDeleteQuery
-  body: Apis.ApiPost.ReqDeleteBody
+  query: Apis.ApiDelete.ReqQuery
+  body: Apis.ApiDelete.ReqBody
 }
 
 export default nc({
@@ -78,7 +78,7 @@ export default nc({
 
     res.status(200).json({ data: newData })
   })
-  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiPost.ResDelete | Apis.Error>) => {
+  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiDelete.Res | Apis.Error>) => {
     await connect()
 
     if (req.query.type === 'delete') {

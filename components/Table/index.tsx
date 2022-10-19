@@ -22,7 +22,7 @@ export type Field = {
 }
 type Action = {
   name: string
-  handler: (response: (Apis.ApiPost.ResDelete | Apis.ApiCategory.ResDelete) & Apis.Error) => void
+  handler: (response: Apis.ApiDelete.Res & Apis.Error) => void
 }
 type Model = Models.Category | Models.Post | Models.Email
 type ListRef<T> = {
@@ -71,7 +71,7 @@ function Table({ fields = [], data = [], actions = [], path, save, edit, copy }:
       const response = await DeleteServer.tableAction({ path, action }, body)
 
       actions.find((item) => item.name === action)!.handler(response)
-      toast.success(action.toUpperCase() + ' successfully!', { id: 'action' })
+      response.error || toast.success(action.toUpperCase() + ' successfully!', { id: 'action' })
     } catch (e) {
       toast.error(action.toUpperCase() + ' failed!', { id: 'action' })
     }

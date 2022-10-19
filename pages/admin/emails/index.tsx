@@ -46,6 +46,21 @@ function Email({ data }: { data: string }) {
     }
   }, [])
 
+  const handleAfterDelete = useCallback((response: Apis.ApiDelete.Res & Apis.Error) => {
+    if (response.error) {
+      toast.error('Actions failed!', { id: 'action' })
+    } else {
+      setEmails((prev) => ({
+        visible: filterIds(prev.visible, response.ids),
+        hidden: filterIds(prev.hidden, response.ids)
+      }))
+    }
+
+    function filterIds(emails: Models.Email[], ids: string[]) {
+      return emails.filter((email) => !ids.includes(email._id))
+    }
+  }, [])
+
   const fields = useMemo(
     () => [
       {
@@ -89,10 +104,10 @@ function Email({ data }: { data: string }) {
     () => [
       {
         name: 'delete',
-        handler: () => {}
+        handler: handleAfterDelete
       }
     ],
-    []
+    [handleAfterDelete]
   )
 
   return (

@@ -105,14 +105,6 @@ declare namespace Apis {
     interface ResEdit {
       data: Models.Category
     }
-
-    interface ReqDeleteQuery extends Query {
-      type: DeleteMethod
-    }
-    interface ReqDeleteBody {
-      ids: string[]
-    }
-    interface ResDelete extends ReqDeleteBody {}
   }
 
   namespace ApiPost {
@@ -170,14 +162,6 @@ declare namespace Apis {
     interface ResEdit {
       data: Models.Post
     }
-
-    interface ReqDeleteQuery extends Query {
-      type: DeleteMethod
-    }
-    interface ReqDeleteBody {
-      ids: string[]
-    }
-    interface ResDelete extends ReqDeleteBody {}
   }
 
   namespace ApiUser {
@@ -283,5 +267,17 @@ declare namespace Apis {
     interface ResCopy {
       data: Vi_Hi<Models.Email[]>
     }
+  }
+
+  namespace ApiDelete {
+    interface ReqQuery extends Query {
+      type: DeleteMethod
+    }
+
+    interface ReqBody {
+      ids: string[]
+    }
+
+    interface Res extends ReqBody {}
   }
 }

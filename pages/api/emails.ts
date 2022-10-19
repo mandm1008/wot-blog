@@ -24,10 +24,30 @@ interface RequestCopy extends RequestVerify {
   body: Apis.ApiEmail.ReqCopy
 }
 
+interface RequestDelete extends RequestVerify {
+  query: Apis.ApiDelete.ReqQuery
+  body: Apis.ApiDelete.ReqBody
+}
+
 export default nc({
   onError: handleError
 })
   .use(verifyTokenAndAdmin)
+  .get(async (req: RequestSend, res) => {
+    await connect()
+
+    const email = await Email.findById(req.query._id)
+    if (!email.title || !email.content) return res.status(404).json({ error: 'Content or Title not found!!!' })
+    if (email.sended) return res.status(403).json({ error: 'Email was sended!!!' })
+    email.sended = new Date().toISOString()
+    await email.save()
+    const data: Models.Email = email.toObject()
+
+    const userEmails = await getAllEmailOfUser()
+    await sendNotificationEmail({ subject: data.title || '', content: data.content || '', users: userEmails })
+
+    res.status(200).json({})
+  })
   .post(async (req: RequestCreate, res: NextApiResponse<Apis.ApiEmail.ResCreate | Apis.Error>) => {
     await connect()
 
@@ -69,18 +89,11 @@ export default nc({
 
     res.status(200).json({})
   })
-  .delete(async (req: RequestSend, res) => {
+  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiDelete.Res | Apis.Error>) => {
     await connect()
 
-    const email = await Email.findById(req.query._id)
-    if (!email.title || !email.content) return res.status(404).json({ error: 'Content or Title not found!!!' })
-    if (email.sended) return res.status(403).json({ error: 'Email was sended!!!' })
-    email.sended = new Date().toISOString()
-    await email.save()
-    const data: Models.Email = email.toObject()
+    await Email.deleteMany({ _id: { $in: req.body.ids } })
+    await Content.deleteMany({ postId: { $in: req.body.ids } })
 
-    const userEmails = await getAllEmailOfUser()
-    await sendNotificationEmail({ subject: data.title || '', content: data.content || '', users: userEmails })
-
-    res.status(200).json({})
+    return res.status(200).json({ ids: req.body.ids })
   })

@@ -4,6 +4,6 @@ export const create = (body: Apis.ApiEmail.ReqCreate) => axios.post<Apis.ApiEmai
 
 export const edit = (body: Apis.ApiEmail.ReqEdit) => axios.patch('emails', body)
 
-export const send = (_id: string) => axios.delete(`emails?_id=${_id}`)
+export const send = (_id: string) => axios.get(`emails?_id=${_id}`)
 
 export const copy = (body: Apis.ApiEmail.ReqCopy) => axios.put<Apis.ApiEmail.ResCopy>('emails', body)

@@ -13,8 +13,8 @@ interface RequestEdit extends NextApiRequest {
 }
 
 interface RequestDelete extends NextApiRequest {
-  query: Apis.ApiCategory.ReqDeleteQuery
-  body: Apis.ApiCategory.ReqDeleteBody
+  query: Apis.ApiDelete.ReqQuery
+  body: Apis.ApiDelete.ReqBody
 }
 
 export default nc({
@@ -43,7 +43,7 @@ export default nc({
 
     res.status(200).json({ data: category.toObject() })
   })
-  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiCategory.ResDelete | Apis.Error>) => {
+  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiDelete.Res | Apis.Error>) => {
     await connect()
 
     if (req.query.type === 'delete') {
