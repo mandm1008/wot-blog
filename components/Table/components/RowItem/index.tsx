@@ -1,4 +1,5 @@
 import { useState, forwardRef, useEffect } from 'react'
+import dayjs from '~/config/day'
 import classNames from 'classnames/bind'
 
 import styles from './RowItem.module.scss'
@@ -50,9 +51,7 @@ function RowItem({ data = {}, name, type, options = {}, path, ...rest }: Props, 
     if (!data[name]) {
       children = '0'
     } else {
-      const time = new Date(data[name])
-      children = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}
-  ${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()}`
+      children = dayjs(data[name]).format('HH:mm:ss DD/MM/YYYY')
     }
   }
   if (type === 'input') {

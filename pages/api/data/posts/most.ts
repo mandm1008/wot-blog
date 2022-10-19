@@ -33,7 +33,7 @@ export default nc({
     }
 
     posts = posts.filter((post) => {
-      const crrTime = new Date(post.updatedAt).getTime() / 1000
+      const crrTime = new Date(post.postedAt || post.createdAt).getTime() / 1000
 
       return crrTime > time
     })

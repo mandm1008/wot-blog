@@ -1,59 +1,12 @@
-export const getTime = (str: string | undefined) => {
-  if (!str) return ''
+import dayjs from '~/config/day'
 
-  const time = new Date(+new Date() - +new Date(str))
-  const month = time.getMonth()
-  const d = time.getDate() - 1
-  const h = time.getHours() - 8
-  const m = time.getMinutes()
-  let children
+export const getTime = (str?: string) => dayjs().to(dayjs(str))
 
-  if (month > 0) {
-    children = ddmmyyyy(str)
-  } else if (d > 0) {
-    children = d + 'd ago'
-  } else if (h > 0) {
-    children = `${h}h ${m}m ago`
-  } else {
-    children = m + 'm ago'
-  }
+export const getTimeInText = (times?: string) => dayjs(times).format('dddd, MMMM DD, YYYY')
 
-  return <i>{children}</i>
-}
+export const hm = (times: string) => dayjs(times).format('HH:mm')
 
-export const getTimeInText = (times?: string) => {
-  const textWeeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const textMonths = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
-  const time = times ? new Date(times) : new Date()
-
-  return `${textWeeks[time.getDay()]}, ${textMonths[time.getMonth()]} ${time.getDate()}, ${time.getFullYear()}`
-}
-
-export const hm = (times: string) => {
-  const time = new Date(times)
-  const m = time.getMinutes()
-
-  return `${time.getHours()}:${m > 9 ? m : '0' + m}`
-}
-
-export const ddmmyyyy = (str: string) => {
-  const time = new Date(str)
-
-  return `${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()}`
-}
+export const ddmmyyyy = (str: string) => dayjs(str).format('DD/MM/YYYY')
 
 export const getText = (str?: string, length = 40) => {
   return str && str.length > length ? str.substring(0, length) + '...' : str
