@@ -23,7 +23,7 @@ function Posts({ posts }: { posts: string }) {
     { name: 'postedAt', as: 'post time', type: 'time' }
   ]
 
-  function handleHidden({ ids, error }: Apis.ApiPost.ResDelete & Apis.Error) {
+  function handleHidden({ ids, error }: Apis.ApiDelete.Res & Apis.Error) {
     if (error) {
       console.log(error)
     } else {
@@ -48,7 +48,7 @@ function Posts({ posts }: { posts: string }) {
     }
   }
 
-  function handleRestore({ ids, error }: Apis.ApiPost.ResDelete & Apis.Error) {
+  function handleRestore({ ids, error }: Apis.ApiDelete.Res & Apis.Error) {
     if (error) {
       console.log(error)
     } else {
@@ -73,7 +73,7 @@ function Posts({ posts }: { posts: string }) {
     }
   }
 
-  function handleDelete({ ids, error }: Apis.ApiPost.ResDelete & Apis.Error, type: 'visible' | 'hidden') {
+  function handleDelete({ ids, error }: Apis.ApiDelete.Res & Apis.Error, type: 'visible' | 'hidden') {
     if (error) {
       console.log(error)
     } else {
