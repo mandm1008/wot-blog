@@ -11,7 +11,7 @@ export default nc({
     cookie.serialize('refreshToken', '', {
       httpOnly: true,
       path: '/',
-      secure: true,
+      // secure: true,
       sameSite: 'strict',
       maxAge: 0
     })
