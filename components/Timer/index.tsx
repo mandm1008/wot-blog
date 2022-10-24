@@ -18,9 +18,7 @@ function Timer({ timeString }: { timeString?: string }, ref: any) {
 
   const setTime = useCallback(() => {
     const currentTime = timeString ? new Date(timeString) : new Date()
-    timerElement.current!.value =
-      currentTime.toISOString().substring(0, currentTime.toISOString().indexOf('T') + 1) +
-      currentTime.toTimeString().substring(0, 5)
+    timerElement.current!.value = currentTime.toISOString().substring(0, currentTime.toISOString().indexOf('T') + 6)
   }, [timeString])
 
   useEffect(() => {
