@@ -6,7 +6,6 @@ interface AccessType extends JwtPayload {
   id?: string
   admin?: boolean
 }
-const a: RequestExternal = {}
 
 interface RequestExternal {
   user?: AccessType
