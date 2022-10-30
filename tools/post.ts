@@ -114,7 +114,7 @@ export async function getPostsByCategory(slug: string) {
 export async function getContentForPostAdmin(id: string): Promise<string> {
   await connect()
 
-  const content = await Content.findOne({ postId: id })
+  const content = (await Content.findOne({ postId: id })).toObject()
 
   return content.content
 }

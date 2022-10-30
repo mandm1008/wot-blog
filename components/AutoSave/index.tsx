@@ -20,9 +20,9 @@ function AutoSave({
   const [oldContent, setOldContent] = useState('')
 
   useEffect(() => {
-    const timeout = loading
+    const interval = loading
       ? undefined
-      : setTimeout(async () => {
+      : setInterval(async () => {
           setLoading(true)
           const body = {
             id: ID,
@@ -42,7 +42,7 @@ function AutoSave({
           }
           setLoading(false)
         }, 5000)
-    return () => clearTimeout(timeout)
+    return () => clearInterval(interval)
   }, [ID, content, loading, oldContent])
 
   return (
