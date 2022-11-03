@@ -55,7 +55,7 @@ export async function getTopPosts(amount = 6) {
 
   for (let i = 0; i < length - 1; i++) {
     for (let j = i + 1; j < length; j++) {
-      if (list[j].view.length >= list[i].view.length) {
+      if (list[j].view >= list[i].view) {
         const step = list[j]
         list[j] = list[i]
         list[i] = step

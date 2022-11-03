@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from 'mongoose'
 import mongooseDelete from 'mongoose-delete'
 
-const Image = new Schema(
+const Image = new Schema<Models.Image>(
   {
     name: String,
     link: String

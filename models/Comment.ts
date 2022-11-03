@@ -1,12 +1,12 @@
 import mongoose, { Schema, model } from 'mongoose'
 import mongooseDelete from 'mongoose-delete'
 
-const Comment = new Schema(
+const Comment = new Schema<Models.Comment>(
   {
     idUser: { type: String, required: true },
     idPost: { type: String, required: true },
     content: { type: String, required: true },
-    like: { type: Array, default: [] },
+    like: { type: Array, default: [] } as { type: any; default: string[] },
     replyId: String
   },
   { timestamps: true }
