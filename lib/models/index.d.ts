@@ -48,9 +48,9 @@ declare namespace Models {
     banner?: string
     content?: string
     categoryId: string[]
-    view: string[]
+    view: number
     like: string[]
-    share: string[]
+    share: number
     author: string
     slug: string
   }
