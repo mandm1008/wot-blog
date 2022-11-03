@@ -27,7 +27,7 @@ export default nc({
       await connect()
 
       const post = (await Post.findOne({ slug: req.query.slug })).toObject()
-      const filter = toObject<Models.Comment>(await Comment.find({ idPost: post._id.toString() }))
+      const filter = toObject(await Comment.find<Models.Comment>({ idPost: post._id.toString() }))
       const comments = await pushUserToComments(filter as Apis.CommentWithUser[])
 
       let data = comments.filter((comment) => !comment.replyId)

@@ -110,7 +110,7 @@ function PostItem({
                 {big || ' '}
                 {list || <br />}
                 <span>
-                  <GrView style={{ marginRight: '4px' }} className={cx('icon')} /> {data.view || '0'}
+                  <GrView style={{ marginRight: '4px' }} className={cx('icon')} /> {Math.ceil(data.view / 2) || '0'}
                 </span>
                 <span>
                   <AiOutlineLike style={{ marginRight: '4px' }} /> {data.like ? data.like.length : '0'}

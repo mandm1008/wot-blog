@@ -103,10 +103,10 @@ export function formatContentHTML(content: string) {
   return result
 }
 
-export function toObject<Type>(data: any[]): Type[] {
+export function toObject<Type>(data: (Type & Model)[]): Type[] {
   return data.map((item) => item.toObject())
 }
 
-export function filterPostWithPostedTime(data: any[]): Models.Post[] {
+export function filterPostWithPostedTime(data: Models.Post[]) {
   return data.filter((item) => !!item.postedAt && new Date().getTime() >= new Date(item.postedAt).getTime())
 }

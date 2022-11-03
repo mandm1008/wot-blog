@@ -12,9 +12,9 @@ export default nc({
 }).get(async (req, res: NextApiResponse<Apis.ApiHeader>) => {
   await connect()
 
-  const categories: Models.Category[] = (await Category.find({})).map((item) => item.toObject())
-  const posts: Models.Post[] = removeContentOfPost(
-    filterPostWithPostedTime((await Post.find({})).map((item) => item.toObject())) as any
+  const categories = (await Category.find<Models.Category>({})).map((item) => item.toObject<Models.Category>())
+  const posts = removeContentOfPost(
+    filterPostWithPostedTime((await Post.find<Models.Post>({})).map((item) => item.toObject())) as any
   )
 
   const data = categories.map((category) => ({

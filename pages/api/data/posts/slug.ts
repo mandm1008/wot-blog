@@ -15,7 +15,7 @@ export default nc({
 }).get(async (req: Request, res: NextApiResponse<Apis.ApiPost.ResSlug>) => {
   await connect()
 
-  const posts: Models.Post[] = filterPostWithPostedTime((await Post.find({})).map((post) => post.toObject()))
+  const posts = filterPostWithPostedTime((await Post.find<Models.Post>({})).map((post) => post.toObject()))
   const index = posts.findIndex((post) => post.slug === req.query.slug)
   let post: Models.Post[] = []
 

@@ -18,7 +18,7 @@ export default nc({
 
   const page = parseInt(req.query.page || '0', 10)
   const newPosts = await getCategoriesWithPosts(await getNewPosts(5))
-  const posts: Models.Post[] = filterPostWithPostedTime((await Post.find({})).map((item) => item.toObject()))
+  const posts = filterPostWithPostedTime((await Post.find<Models.Post>({})).map((item) => item.toObject()))
 
   const morePosts = sort(
     await getCategoriesWithPosts(

@@ -5,6 +5,7 @@ declare type Model = {
   deleted?: boolean
   deletedAt?: string
   postedAt?: string
+  toObject: <T>() => T
 }
 
 declare namespace Models {

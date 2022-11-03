@@ -80,7 +80,7 @@ function Interactive({ id, view, like = [], share, fixedTop = 80 }: Props) {
         className={cx('inner')}
         style={{ top: debounceValue + 'px' }}
       >
-        <div className={cx('item', 'view')}>{(view || 0) + 1}</div>
+        <div className={cx('item', 'view')}>{(view ? Math.ceil(view / 2) : 0) + 1}</div>
 
         <div className={cx('item', 'like')} onClick={isLike ? () => {} : handleLike}>
           <div className={cx('item', 'like', { liked: isLike })}>{isLike ? <AiFillLike /> : <AiOutlineLike />}</div>

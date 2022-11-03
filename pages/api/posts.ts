@@ -32,7 +32,11 @@ export default nc({
       if (req.query.type) {
         const posts = await Post.findById(req.query.id)
         const idUser = req.query.idUser || 'customer'
-        posts[req.query.type].push(idUser)
+        if (typeof posts[req.query.type] === 'number') {
+          posts[req.query.type] += 1
+        } else {
+          posts[req.query.type].push(idUser)
+        }
         await posts.save()
         return res.status(200).json({})
       }
