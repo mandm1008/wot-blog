@@ -2,7 +2,7 @@ import mongoose, { Schema, plugin, model } from 'mongoose'
 import mongooseDelete from 'mongoose-delete'
 import slug from 'mongoose-slug-generator'
 
-const Category = new Schema(
+const Category = new Schema<Models.Category>(
   {
     title: {
       type: String,

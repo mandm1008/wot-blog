@@ -15,19 +15,16 @@ export const getText = (str?: string, length = 40) => {
 export function sort<Type = Models.Post>(data: Type[], key: Apis.SortType) {
   const handler = {
     popular(x: Models.Post, y: Models.Post) {
-      return (
-        x.view.length + x.like.length * 5 + x.share.length * 10 <=
-        y.view.length + y.like.length * 5 + y.share.length * 10
-      )
+      return x.view + x.like.length * 5 + x.share * 10 <= y.view + y.like.length * 5 + y.share * 10
     },
     share(x: Models.Post, y: Models.Post) {
-      return x.share.length <= y.share.length
+      return x.share <= y.share
     },
     like(x: Models.Post, y: Models.Post) {
       return x.like.length <= y.like.length
     },
     view(x: Models.Post, y: Models.Post) {
-      return x.view.length <= y.view.length
+      return x.view <= y.view
     },
     time(x: Type & Model, y: Type & Model) {
       return new Date(x.postedAt || x.createdAt).getTime() <= new Date(y.postedAt || y.createdAt).getTime()
@@ -106,10 +103,10 @@ export function formatContentHTML(content: string) {
   return result
 }
 
-export function toObject<Type>(data: any[]): Type[] {
+export function toObject<Type>(data: (Type & Model)[]): Type[] {
   return data.map((item) => item.toObject())
 }
 
-export function filterPostWithPostedTime(data: any[]): Models.Post[] {
+export function filterPostWithPostedTime(data: Models.Post[]) {
   return data.filter((item) => !!item.postedAt && new Date().getTime() >= new Date(item.postedAt).getTime())
 }

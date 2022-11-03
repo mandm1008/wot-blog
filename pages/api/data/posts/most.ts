@@ -17,7 +17,7 @@ export default nc({
   await connect()
 
   let posts = await getCategoriesWithPosts(
-    filterPostWithPostedTime((await Post.find({})).map((item) => item.toObject()))
+    filterPostWithPostedTime((await Post.find<Models.Post>({})).map((item) => item.toObject()))
   )
   const category: Models.Category | null = JSON.parse(req.query.category || 'null')
 

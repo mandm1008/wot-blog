@@ -8,30 +8,30 @@ import { filterPostWithPostedTime } from '~/tools'
 export async function getAllSlugs(admin = false) {
   await connect()
 
-  let posts = toObject<Models.Post>(admin ? await Post.findWithDeleted({}) : await Post.find({}))
+  let posts = toObject(admin ? await Post.findWithDeleted<Models.Post>({}) : await Post.find<Models.Post>({}))
 
   if (!admin) {
     posts = filterPostWithPostedTime(posts)
   }
 
-  const slugs: string[] = posts.map((post) => post.slug)
+  const slugs = posts.map((post) => post.slug)
 
   return slugs
 }
 
-export async function getPostBySlug(slug: string): Promise<Models.Post> {
+export async function getPostBySlug(slug: string) {
   await connect()
 
-  const post = await Post.findOneWithDeleted({ slug })
+  const post = await Post.findOneWithDeleted<Models.Post>({ slug })
 
-  return post && post.toObject()
+  return post !== null ? post.toObject<Models.Post>() : undefined
 }
 
 export async function getAllPosts(admin = false) {
   await connect()
 
-  let visible = toObject<Models.Post>(await Post.find({}))
-  let hidden = toObject<Models.Post>(await Post.findDeleted({}))
+  let visible = toObject(await Post.find<Models.Post>({}))
+  let hidden = toObject(await Post.findDeleted<Models.Post>({}))
 
   if (!admin) {
     visible = filterPostWithPostedTime(visible)
@@ -49,13 +49,13 @@ export async function getAllPosts(admin = false) {
 export async function getTopPosts(amount = 6) {
   await connect()
 
-  const posts = await Post.find({})
-  const list = filterPostWithPostedTime(toObject<Models.Post>(posts))
+  const posts = await Post.find<Models.Post>({})
+  const list = filterPostWithPostedTime(toObject(posts))
   const length = list.length
 
   for (let i = 0; i < length - 1; i++) {
     for (let j = i + 1; j < length; j++) {
-      if (list[j].view.length >= list[i].view.length) {
+      if (list[j].view >= list[i].view) {
         const step = list[j]
         list[j] = list[i]
         list[i] = step
@@ -69,8 +69,8 @@ export async function getTopPosts(amount = 6) {
 export async function getNewPosts(amount = 5) {
   await connect()
 
-  const posts = await Post.find({})
-  const list = filterPostWithPostedTime(toObject<Models.Post>(posts))
+  const posts = await Post.find<Models.Post>({})
+  const list = filterPostWithPostedTime(toObject(posts))
   const length = list.length
 
   for (let i = 0; i < length - 1; i++) {
@@ -92,7 +92,7 @@ export async function getNewPosts(amount = 5) {
 export async function getPostsForSearch(q: string) {
   await connect()
 
-  const posts = filterPostWithPostedTime(toObject<Models.Post>(await Post.find({})))
+  const posts = filterPostWithPostedTime(toObject(await Post.find<Models.Post>({})))
 
   return posts.filter(
     (post) =>
@@ -105,23 +105,27 @@ export async function getPostsForSearch(q: string) {
 export async function getPostsByCategory(slug: string) {
   await connect()
 
-  const category = await Category.findOne({ slug })
-  const posts = filterPostWithPostedTime(toObject<Models.Post>(await Post.find({})))
+  const category = await Category.findOne<Models.Category>({ slug })
+  if (category === null) return []
+
+  const posts = filterPostWithPostedTime(toObject(await Post.find<Models.Post>({})))
 
   return posts.filter((post) => post.categoryId.includes(category._id.toString()))
 }
 
-export async function getContentForPostAdmin(id: string): Promise<string> {
+export async function getContentForPostAdmin(id: string) {
   await connect()
 
-  const content = (await Content.findOne({ postId: id })).toObject()
+  const content = (await Content.findOne<Models.Content>({ postId: id }))!.toObject<Models.Content>()
 
   return content.content
 }
 
 export function removeContentOfPost<T = Apis.PostWithCategory>(data: (T & Apis.PostWithCategory)[] = []): T[] {
+  console.log(data)
   return data.map((item) => {
     item.content = ''
+    console.log(1)
     return item
   })
 }

@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from 'mongoose'
 import mongooseDelete from 'mongoose-delete'
 
-const User = new Schema(
+const User = new Schema<Models.User>(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },

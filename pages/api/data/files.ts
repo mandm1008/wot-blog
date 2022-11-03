@@ -23,7 +23,7 @@ export default nc({
     await connect()
 
     const page = parseInt(req.query.page || '1', 10)
-    const files = sort<Models.File>(toObject(await File.find({})), 'time')
+    const files = sort(toObject(await File.find<Models.File>({})), 'time')
     const data = files.slice((page - 1) * 36, page * 36)
 
     res.status(200).json({ files: data, totalPages: Math.ceil(files.length / 36) })

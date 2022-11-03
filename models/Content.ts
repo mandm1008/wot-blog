@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose'
 
-const Content = new Schema(
+const Content = new Schema<Models.Content>(
   {
     postId: String,
     content: String

@@ -20,7 +20,7 @@ export default nc({
     await connect()
 
     const page = parseInt((req.query.page as string) || '1', 10)
-    const images = sort<Models.Image>(toObject<Models.Image>(await Image.find({})), 'time')
+    const images = sort(toObject(await Image.find<Models.Image>({})), 'time')
     const data = images.slice((page - 1) * 36, page * 36)
 
     res.status(200).json({ images: data, totalPages: Math.ceil(images.length / 36) })

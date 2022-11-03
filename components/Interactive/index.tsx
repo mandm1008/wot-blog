@@ -14,13 +14,13 @@ const cx = classNames.bind(styles)
 
 interface Props {
   id: string
-  view?: string[]
+  view?: number
   like?: string[]
-  share?: string[]
+  share?: number
   fixedTop?: number
 }
 
-function Interactive({ id, view = [], like = [], share = [], fixedTop = 80 }: Props) {
+function Interactive({ id, view, like = [], share, fixedTop = 80 }: Props) {
   const [{ user }] = useStore()
   const liked = useMemo(() => !!user && like.includes(user._id), [like, user])
   const [isLike, setIsLike] = useState(liked)
@@ -80,7 +80,7 @@ function Interactive({ id, view = [], like = [], share = [], fixedTop = 80 }: Pr
         className={cx('inner')}
         style={{ top: debounceValue + 'px' }}
       >
-        <div className={cx('item', 'view')}>{view.length + 1}</div>
+        <div className={cx('item', 'view')}>{(view ? Math.ceil(view / 2) : 0) + 1}</div>
 
         <div className={cx('item', 'like')} onClick={isLike ? () => {} : handleLike}>
           <div className={cx('item', 'like', { liked: isLike })}>{isLike ? <AiFillLike /> : <AiOutlineLike />}</div>
@@ -91,7 +91,7 @@ function Interactive({ id, view = [], like = [], share = [], fixedTop = 80 }: Pr
           <div className={cx('item', 'like')}>
             <SharedIcon size="12" />
           </div>
-          <div className={cx('item', 'like')}>{share.length}</div>
+          <div className={cx('item', 'like')}>{share || 0}</div>
         </div>
       </div>
     </div>

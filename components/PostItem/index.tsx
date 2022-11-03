@@ -81,7 +81,7 @@ function PostItem({
             {popular && (
               <span className={cx('share')}>
                 <SharedIcon style={{ marginRight: '6px' }} size={layout === 1 ? '8' : '12'} />
-                {data.share ? data.share.length : '0'}
+                {data.share || '0'}
               </span>
             )}
           </div>
@@ -110,14 +110,13 @@ function PostItem({
                 {big || ' '}
                 {list || <br />}
                 <span>
-                  <GrView style={{ marginRight: '4px' }} className={cx('icon')} /> {data.view ? data.view.length : '0'}
+                  <GrView style={{ marginRight: '4px' }} className={cx('icon')} /> {Math.ceil(data.view / 2) || '0'}
                 </span>
                 <span>
                   <AiOutlineLike style={{ marginRight: '4px' }} /> {data.like ? data.like.length : '0'}
                 </span>
                 <span>
-                  <SharedIcon style={{ marginRight: '6px' }} size={layout === 1 ? '8' : '12'} />{' '}
-                  {data.share ? data.share.length : '0'}
+                  <SharedIcon style={{ marginRight: '6px' }} size={layout === 1 ? '8' : '12'} /> {data.share || '0'}
                 </span>
               </p>
             </>

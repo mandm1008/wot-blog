@@ -2,7 +2,7 @@ import mongoose, { Schema, plugin, model } from 'mongoose'
 import slug from 'mongoose-slug-generator'
 import mongooseDelete from 'mongoose-delete'
 
-const Email = new Schema(
+const Email = new Schema<Models.Email>(
   {
     name: { type: String, required: true },
     title: String,

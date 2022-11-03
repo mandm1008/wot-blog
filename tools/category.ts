@@ -3,8 +3,8 @@ import Category from '../models/Category'
 
 export async function getAllCategory(admin = false) {
   await connect()
-  const visible: Models.Category[] = await Category.find({})
-  const hidden: Models.Category[] = await Category.findDeleted({})
+  const visible = await Category.find<Models.Category>({})
+  const hidden = await Category.findDeleted<Models.Category>({})
 
   return admin
     ? {
@@ -18,8 +18,8 @@ export async function getListCategory(listId: string[], admin = false): Promise<
   await connect()
 
   const categories = admin
-    ? await Category.findWithDeleted({ _id: { $in: listId } })
-    : await Category.find({ _id: { $in: listId } })
+    ? await Category.findWithDeleted<Models.Category>({ _id: { $in: listId } })
+    : await Category.find<Models.Category>({ _id: { $in: listId } })
 
   return categories
 }
@@ -38,7 +38,9 @@ export async function getCategoriesWithPosts(posts: Models.Post[], admin = false
 export async function getCategoryBySlug(slug: string, admin = false): Promise<Models.Category | undefined> {
   await connect()
 
-  const category = admin ? await Category.findOneWithDeleted({ slug }) : await Category.findOne({ slug })
+  const category = admin
+    ? await Category.findOneWithDeleted<Models.Category>({ slug })
+    : await Category.findOne<Models.Category>({ slug })
 
-  return category && category.toObject()
+  return category !== null ? category.toObject<Models.Category>() : undefined
 }

@@ -1,7 +1,7 @@
 import mongoose, { Schema, model } from 'mongoose'
 import mongooseDelete from 'mongoose-delete'
 
-const File = new Schema(
+const File = new Schema<Models.File>(
   {
     name: String,
     link: String

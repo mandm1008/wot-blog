@@ -192,7 +192,7 @@ import { getListCategory } from '~/tools/category'
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPostBySlug(params!.slug as string)
-  const categories = await getListCategory(post.categoryId)
+  const categories = await getListCategory(post!.categoryId)
 
   return {
     props: {
