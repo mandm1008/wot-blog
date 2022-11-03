@@ -17,7 +17,7 @@ function PostItem({ data }: { data: Models.Post }) {
           {getText(data.title)}
         </Link>
         <p className={cx('description')}>
-          {ddmmyyyy(data.postedAt || data.createdAt)} • <SharedIcon size="12" /> {data.share ? data.share.length : '0'}
+          {ddmmyyyy(data.postedAt || data.createdAt)} • <SharedIcon size="12" /> {data.share || '0'}
         </p>
       </div>
     </div>
