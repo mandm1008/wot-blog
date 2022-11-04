@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import classNames from 'classnames/bind'
 import styles from './MostPopular.module.scss'
 import PostItem from '../PostItem'
+import Loading from '../Loading'
 import { SWRServer } from '~/servers'
 
 const cx = classNames.bind(styles)
@@ -28,7 +29,7 @@ function MostPopular() {
         </div>
 
         <div className={cx('content')}>
-          {!data && !error && 'Loading...'}
+          {!data && !error && <Loading ellipsis />}
           {error && 'Error loading data'}
           {data && data.map((post, i) => <PostItem key={post._id} big popular data={post} rank={i + 1} />)}
         </div>
