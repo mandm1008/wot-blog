@@ -280,4 +280,10 @@ declare namespace Apis {
 
     interface Res extends ReqBody {}
   }
+
+  namespace ApiTime {
+    interface Get {
+      now: string
+    }
+  }
 }
