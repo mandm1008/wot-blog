@@ -19,6 +19,7 @@ import AutoSave from '~/components/AutoSave'
 import Timer from '~/components/Timer'
 import { formatContentHTML } from '~/tools'
 import { PostServer, ContentServer } from '~/servers'
+import dayjs from '~/config/day'
 
 const cx = classNames.bind(styles)
 
@@ -56,7 +57,8 @@ function EditPost({
       categoryId: JSON.parse(valueSelectedCategory.current!.value),
       deleted: !isVisiblePost,
       banner: srcImage || undefined,
-      postedAt: postedTime.current?.current.value && new Date(postedTime.current?.current.value).toISOString()
+      postedAt:
+        postedTime.current?.current.value && dayjs.utc(new Date(postedTime.current?.current.value)).toISOString()
     }
 
     toast.loading('Updating...', { id: 'update' })
@@ -171,6 +173,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
   if (noAdmin) return noAdmin
 
   const post = await getPostBySlug(params!.slug as string)
+  if (!post)
+    return {
+      props: {},
+      redirect: {
+        destination: '/admin/posts'
+      }
+    }
+
   post.content = (await getContentForPostAdmin(post._id)) || post.content
   const categories = await getAllCategory(true)
   const selectedCategories = await getListCategory(post.categoryId, true)
