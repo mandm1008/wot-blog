@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, forwardRef, useCallback } from 'react'
 import classNames from 'classnames/bind'
 import styles from './Timer.module.scss'
 import Button from '../Button'
+import dayjs from '~/config/day'
 
 const cx = classNames.bind(styles)
 
@@ -17,8 +18,8 @@ function Timer({ timeString }: { timeString?: string }, ref: any) {
   }
 
   const setTime = useCallback(() => {
-    const currentTime = timeString ? new Date(timeString) : new Date()
-    timerElement.current!.value = currentTime.toISOString().substring(0, currentTime.toISOString().indexOf('T') + 6)
+    const currentTime = timeString ? dayjs(timeString) : dayjs()
+    timerElement.current!.value = currentTime.format('YYYY-MM-DDTHH:mm')
   }, [timeString])
 
   useEffect(() => {

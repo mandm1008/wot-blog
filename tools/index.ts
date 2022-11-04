@@ -1,12 +1,12 @@
 import dayjs from '~/config/day'
 
-export const getTime = (str?: string) => dayjs().to(dayjs(str))
+export const getTime = (str?: string) => dayjs.utc(dayjs()).to(dayjs.utc(str))
 
-export const getTimeInText = (times?: string) => dayjs(times).format('dddd, MMMM DD, YYYY')
+export const getTimeInText = (times?: string) => dayjs.utc(times).format('dddd, MMMM DD, YYYY')
 
-export const hm = (times: string) => dayjs(times).format('HH:mm')
+export const hm = (times: string) => dayjs.utc(times).format('HH:mm')
 
-export const ddmmyyyy = (str: string) => dayjs(str).format('DD/MM/YYYY')
+export const ddmmyyyy = (str: string) => dayjs.utc(str).format('DD/MM/YYYY')
 
 export const getText = (str?: string, length = 40) => {
   return str && str.length > length ? str.substring(0, length) + '...' : str
