@@ -13,7 +13,7 @@ declare global {
 
 function Ads({ className }: { className?: string }) {
   useEffect(() => {
-    lengthAds.forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}))
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }, [])
 
   return (

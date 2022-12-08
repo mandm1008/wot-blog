@@ -22,6 +22,7 @@ import ShareGroup from '~/components/ShareGroup'
 import { useStore } from '~/components/store'
 import { getTime, getTimeInText } from '~/tools'
 import { server } from '~/config/constants'
+import Image from '~/config/image'
 import { SWRServer } from '~/servers'
 
 const cx = classNames.bind(styles)
@@ -151,12 +152,9 @@ function Post({ data = '{}' }) {
       )}
 
       <div className={cx('popular-category')}>
-        <div
-          className={cx('background')}
-          style={{
-            backgroundImage: `url(${post.banner || '/background.svg'})`
-          }}
-        ></div>
+        <div className={cx('background')}>
+          <Image src={post.banner || '/background.svg'} alt={post.title} layout="fill" />
+        </div>
         <PopularCategory categories={post.categories} />
       </div>
 
