@@ -12,9 +12,9 @@ declare global {
 }
 
 function Ads({ className }: { className?: string }) {
-  // useEffect(() => {
-  //   lengthAds.forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}))
-  // }, [])
+  useEffect(() => {
+    lengthAds.forEach(() => (window.adsbygoogle = window.adsbygoogle || []).push({}))
+  }, [])
 
   return (
     <div className={cx('wrapper', { [className as any]: className })}>
