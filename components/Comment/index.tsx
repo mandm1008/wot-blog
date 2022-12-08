@@ -1,5 +1,5 @@
 import { useCallback, useState, memo, useRef, useEffect } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 import toast from 'react-hot-toast'

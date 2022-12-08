@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, memo } from 'react'
 import useSWR from 'swr'
-import Image from 'next/image'
+import Image from '~/config/image'
 import toast from 'react-hot-toast'
 import classNames from 'classnames/bind'
 

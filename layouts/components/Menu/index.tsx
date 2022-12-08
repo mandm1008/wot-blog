@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { ReferenceElement } from 'tippy.js'

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from '~/config/image'
 import { useRouter } from 'next/router'
 import Tippy from '@tippyjs/react'
 import toast from 'react-hot-toast'

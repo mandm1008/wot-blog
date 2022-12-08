@@ -1,5 +1,5 @@
 import { forwardRef, useState, useEffect, useRef, useCallback, memo } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import classNames from 'classnames/bind'
