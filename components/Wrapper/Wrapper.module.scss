@@ -21,7 +21,11 @@
     position: absolute;
     inset: 0;
     filter: brightness(0.5);
-    background-size: cover;
+
+    img {
+      object-fit: cover;
+      object-position: top;
+    }
   }
 }
 

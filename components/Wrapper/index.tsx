@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 import styles from './Wrapper.module.scss'
+import Image from '~/config/image'
 
 const cx = classNames.bind(styles)
 
@@ -18,12 +19,9 @@ function Wrapper({ children, Head, Content, background }: Props) {
       <main className={cx('main')}>
         <div className={cx('inner', { default: !background })}>
           {background && (
-            <div
-              className={cx('background')}
-              style={{
-                backgroundImage: background ? `url("${background}")` : 'none'
-              }}
-            ></div>
+            <div className={cx('background')}>
+              <Image src={background} alt="Banner" layout="fill" />
+            </div>
           )}
           {Content}
         </div>
