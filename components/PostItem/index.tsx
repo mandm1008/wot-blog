@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import classNames from 'classnames/bind'
 
 import styles from './PostItem.module.scss'
@@ -10,6 +10,7 @@ import { getTime, getText } from '~/tools'
 import { GrView } from 'react-icons/gr'
 import { AiOutlineLike } from 'react-icons/ai'
 import { SharedIcon } from '../Icons'
+import { demoImage } from '~/assets/images'
 
 const cx = classNames.bind(styles)
 
@@ -61,7 +62,7 @@ function PostItem({
       {rank && <div className={cx('rank')}>{rank}</div>}
       <ImgCtn href={`/posts/${data.slug}`}>
         <Image
-          src={data.banner || '/demo.jpg'}
+          src={data.banner || demoImage.src}
           alt={data.title}
           width={big ? (popular ? 285 : 660) : 360}
           height={big ? (popular ? 170 : 425) : 220}

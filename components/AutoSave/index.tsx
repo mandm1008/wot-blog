@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
-import Image from 'next/image'
+import Image from '~/config/image'
 import { formatContentHTML } from '~/tools'
 import { BsFillCloudCheckFill, BsFillCloudSlashFill } from 'react-icons/bs'
 import { Editor } from 'tinymce'

@@ -2,10 +2,12 @@ import React, { useEffect, useState, useRef, memo } from 'react'
 import classNames from 'classnames/bind'
 import styles from './Scrollbar.module.scss'
 import { CgMenuGridO } from 'react-icons/cg'
+import { useStore } from '../store'
 
 const cx = classNames.bind(styles)
 
 function Scrollbar() {
+  const [{ layout }] = useStore()
   const [visible, setVisible] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const element = useRef<HTMLDivElement>()
@@ -70,7 +72,7 @@ function Scrollbar() {
     element.current!.style.transform = 'translateX(100%)'
   }
 
-  return (
+  return layout === 3 ? (
     <div ref={element as React.LegacyRef<HTMLDivElement>} className={cx('wrapper', { visible })}>
       <div
         className={cx('inner')}
@@ -81,7 +83,7 @@ function Scrollbar() {
         <CgMenuGridO />
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default memo(Scrollbar)

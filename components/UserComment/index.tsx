@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState, forwardRef, useEffect } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import toast from 'react-hot-toast'
 import classNames from 'classnames/bind'
 

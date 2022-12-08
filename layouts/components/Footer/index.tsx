@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import Image from 'next/image'
+import Image from '~/config/image'
 import classNames from 'classnames/bind'
 import styles from './Footer.module.scss'
 import Link from '~/components/Link'

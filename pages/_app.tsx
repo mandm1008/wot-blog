@@ -39,6 +39,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           ></script>
         )}
       </Head>
+
       <NextSeo
         titleTemplate="%s | WoT Blog"
         defaultTitle="WoT Blog"
@@ -52,13 +53,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           appId: '820746182274481'
         }}
       />
+
       <NextProgressBar />
-      <Scrollbar />
+
       <Notification />
+
       <UserProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <>
+          <Scrollbar />
+
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </>
       </UserProvider>
     </>
   )

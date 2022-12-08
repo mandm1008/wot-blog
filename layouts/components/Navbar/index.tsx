@@ -1,7 +1,7 @@
 import { memo, useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import Image from 'next/image'
+import Image from '~/config/image'
 import { ReferenceElement } from 'tippy.js'
 import className from 'classnames/bind'
 
