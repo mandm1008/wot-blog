@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind'
 import styles from '~/styles/About.module.scss'
 import Wrapper from '~/components/Wrapper'
-import { server } from '~/config/constants'
 import Link from '~/components/Link'
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 
@@ -10,7 +9,7 @@ const cx = classNames.bind(styles)
 function Page500() {
   return (
     <Wrapper
-      background={`${server}/about.jpg`}
+      background="/about.jpg"
       Content={
         <div className={cx('head')}>
           404 - Page not found! Go home

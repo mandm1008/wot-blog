@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic'
 import { useState, useEffect, useRef } from 'react'
 import classnames from 'classnames/bind'
 
 import styles from './Layout.module.scss'
 import { useStore, actions } from '../components/store'
 import Header from './components/Header'
-import Footer from './components/Footer'
+
+const Footer = dynamic(() => import('./components/Footer'))
 
 const cx = classnames.bind(styles)
 const defaultHeight = 184

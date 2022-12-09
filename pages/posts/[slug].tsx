@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -7,23 +8,24 @@ import classNames from 'classnames/bind'
 
 import styles from '~/styles/Post.module.scss'
 import Wrapper from '~/components/Wrapper'
-import MostPopular from '~/components/MostPopular'
-import MostShare from '~/components/MostShare'
 import Ads from '~/components/Ads'
 import Interactive from '~/components/Interactive'
 import Category from '~/components/Category'
 import PopularCategory from '~/components/PopularCategory'
-import CanLike from '~/components/CanLike'
-import UserComment from '~/components/UserComment'
-import Comment from '~/components/Comment'
 import Button from '~/components/Button'
 import CountView from '~/components/CountView'
-import ShareGroup from '~/components/ShareGroup'
 import { useStore } from '~/components/store'
 import { getTime, getTimeInText } from '~/tools'
 import { server } from '~/config/constants'
 import Image from '~/config/image'
 import { SWRServer } from '~/servers'
+
+const MostPopular = dynamic(() => import('~/components/MostPopular'))
+const MostShare = dynamic(() => import('~/components/MostShare'))
+const CanLike = dynamic(() => import('~/components/CanLike'))
+const UserComment = dynamic(() => import('~/components/UserComment'))
+const Comment = dynamic(() => import('~/components/Comment'))
+const ShareGroup = dynamic(() => import('~/components/ShareGroup'))
 
 const cx = classNames.bind(styles)
 const getListComments = (listComments: Apis.ApiComment.ResGet[]) =>

@@ -37,7 +37,7 @@ function Contact() {
           }}
         />
       }
-      background={`${server}/about.jpg`}
+      background="/about.jpg"
       Content={
         <div className={cx('head')}>
           <div className={cx('slogan')}>

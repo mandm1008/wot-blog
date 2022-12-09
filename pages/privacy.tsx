@@ -29,7 +29,7 @@ function Privacy() {
           }}
         />
       }
-      background={`${server}/about.jpg`}
+      background="/about.jpg"
     >
       <div className={cx('content')}>
         <h1>Privacy Notice</h1>

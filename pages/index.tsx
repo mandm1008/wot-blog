@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { NextSeo } from 'next-seo'
 import useSWR, { SWRConfig } from 'swr'
 import useSWRInfinite from 'swr/infinite'
@@ -9,7 +10,6 @@ import styles from '~/styles/Home.module.scss'
 import Link from '~/components/Link'
 import SlidePosts from '~/components/SlidePosts'
 import PostItem from '~/components/PostItem'
-import MostPopular from '~/components/MostPopular'
 import Button from '~/components/Button'
 import Loading from '~/components/Loading'
 import Ads from '~/components/Ads'
@@ -17,6 +17,8 @@ import { getTimeInText } from '~/tools'
 import { CgMenuRound } from 'react-icons/cg'
 import { server } from '~/config/constants'
 import { SWRServer } from '~/servers'
+
+const MostPopular = dynamic(() => import('~/components/MostPopular'))
 
 const cx = classNames.bind(styles)
 const getKey = (index: number) => (index ? '/api/data/posts/more?page=' + index : '/api/data/posts/more')

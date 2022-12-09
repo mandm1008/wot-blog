@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { AppProps } from 'next/app'
 import NextProgressBar from 'nextjs-progressbar'
 import Head from 'next/head'
@@ -8,7 +9,8 @@ import '../styles/global.scss'
 import Layout from '~/layouts'
 import { UserProvider } from '~/components/store'
 import Notification from '~/components/Notification'
-import Scrollbar from '~/components/Scrollbar'
+
+const Scrollbar = dynamic(() => import('~/components/Scrollbar'))
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()

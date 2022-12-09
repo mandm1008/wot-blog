@@ -83,7 +83,7 @@ function Navbar({ top, isTopNav, openSearch = () => {}, openLogin = () => {}, op
           />
         </Link>
       )}
-      <ul className={cx('nav-main')}>
+      <div className={cx('nav-main')}>
         {top && router.pathname.startsWith('/posts') && !isOpen && (
           <IoClose className={cx('close-icon')} onClick={() => setIsOpen(true)} />
         )}
@@ -109,7 +109,7 @@ function Navbar({ top, isTopNav, openSearch = () => {}, openLogin = () => {}, op
         {top && router.pathname.startsWith('/posts') && (
           <NavPost slug={router.query.slug as string} isOpen={isOpen} onClickMenu={() => setIsOpen(false)} />
         )}
-      </ul>
+      </div>
 
       <ul className={cx('nav-controls')}>
         {/* <NavPopper
