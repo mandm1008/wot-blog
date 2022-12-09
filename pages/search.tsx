@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState, useMemo } from 'react'
 import Head from 'next/head'
@@ -7,12 +8,13 @@ import styles from '~/styles/Search.module.scss'
 import { useStore } from '~/components/store'
 import Wrapper from '~/components/Wrapper'
 import Ads from '~/components/Ads'
-import MostPopular from '~/components/MostPopular'
 import Link from '~/components/Link'
 import PostItem from '~/components/PostItem'
 import { OptionsPopper } from '~/components/Popper'
 import { SearchIcon } from '~/components/Icons'
 import { TbPlayerTrackPrev, TbPlayerTrackNext } from 'react-icons/tb'
+
+const MostPopular = dynamic(() => import('~/components/MostPopular'))
 
 const cx = classNames.bind(styles)
 

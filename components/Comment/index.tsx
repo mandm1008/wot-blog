@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useCallback, useState, memo, useRef, useEffect } from 'react'
 import Image from '~/config/image'
 import Tippy from '@tippyjs/react'
@@ -7,9 +8,10 @@ import classNames from 'classnames/bind'
 
 import styles from './Comment.module.scss'
 import { getTimeInText, hm } from '~/tools'
-import UserComment from '../UserComment'
 import { useStore } from '../store'
 import { CommentServer } from '~/servers'
+
+const UserComment = dynamic(() => import('../UserComment'))
 
 const cx = classNames.bind(styles)
 

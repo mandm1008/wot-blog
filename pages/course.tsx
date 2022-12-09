@@ -29,7 +29,7 @@ function Course() {
           }}
         />
       }
-      background={`${server}/about.jpg`}
+      background="/about.jpg"
       Content={<div className={cx('head')}>Coming Soon...</div>}
     ></Wrapper>
   )
