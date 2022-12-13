@@ -75,6 +75,7 @@ declare namespace Apis {
   namespace ApiCategory {
     interface ReqGetCategory extends Query {
       slug: string
+      admin?: string
     }
     interface ResCategory extends Models.Category {}
 
@@ -108,6 +109,16 @@ declare namespace Apis {
   }
 
   namespace ApiPost {
+    interface ReqGet extends Query {
+      length?: string
+      filter?: 'true' | 'false'
+      sort?: SortType[]
+      hasCategory?: 'true' | 'false'
+    }
+    interface ResGet {
+      data: Models.Post[] | PostWithCategory[]
+    }
+
     interface ReqMore extends Query {
       page: string
     }

@@ -1,19 +1,13 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import nc from 'next-connect'
+import { createRoute, routerHandler } from '~/config/nc'
 import { sign } from 'jsonwebtoken'
 import cookie from 'cookie'
 import { compare } from 'bcrypt'
 import { connect } from '~/config/db'
 import User from '~/models/User'
-import { handleError } from '~/tools/middleware'
 
-interface Request extends NextApiRequest {
-  body: Apis.ApiUser.ReqLogin
-}
+const router = createRoute<Apis.ApiUser.ResLogin, { body: Apis.ApiUser.ReqLogin }>()
 
-export default nc({
-  onError: handleError
-}).post(async (req: Request, res: NextApiResponse<Apis.ApiUser.ResLogin | Apis.Error>) => {
+router.post(async (req, res) => {
   await connect()
 
   const { email, password, remember } = req.body
@@ -63,3 +57,5 @@ export default nc({
     return res.status(200).json({ accessToken, ...data })
   }
 })
+
+export default routerHandler(router)

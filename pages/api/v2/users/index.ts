@@ -1,18 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import nc from 'next-connect'
+import { createRoute, routerHandler } from '~/config/nc'
 import { sign } from 'jsonwebtoken'
 import cookie from 'cookie'
 import { connect } from '~/config/db'
-import { verifyToken, handleError, RequestVerify } from '~/tools/middleware'
+import { verifyToken, RequestVerify } from '~/tools/middleware'
 import User from '~/models/User'
 
-interface Request extends NextApiRequest, RequestVerify {}
+const router = createRoute<Apis.ApiUser.ResGet | Apis.ApiUser.ResEdit, { body: Apis.ApiUser.ReqEdit }>()
 
-export default nc({
-  onError: handleError
-})
+router
   .use(verifyToken)
-  .get(async (req: Request, res: NextApiResponse<Apis.ApiUser.ResGet | Apis.Error>) => {
+  .get(async (req: RequestVerify, res) => {
     await connect()
 
     if (!req.user) return res.status(404).json({ error: 'Account not found!' })
@@ -58,3 +55,17 @@ export default nc({
 
     res.status(200).json({ accessToken, ...data })
   })
+  .post(async (req: RequestVerify<{ body: Apis.ApiUser.ReqEdit }>, res) => {
+    await connect()
+    if (!req.user || (typeof req.user !== 'string' && !req.user.id))
+      return res.status(404).json({ error: 'Account not found!' })
+
+    const user = await User.findById(req.user.id)
+    user.name = req.body.name.trim()
+    await user.save()
+    const { password, ...data } = user.toObject() as Models.User
+
+    res.status(200).json(data)
+  })
+
+export default routerHandler(router)

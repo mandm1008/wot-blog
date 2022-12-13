@@ -1,19 +1,13 @@
-import { NextApiRequest } from 'next'
-import nc from 'next-connect'
+import { createRoute, routerHandler } from '~/config/nc'
 import { sign } from 'jsonwebtoken'
 import CryptoJS from 'crypto-js'
 import { connect } from '~/config/db'
-import { sendConfirmationEmail } from '~/config/mailer'
-import { handleError } from '~/tools/middleware'
+import { sendVerifyEmail } from '~/config/mailer'
 import User from '~/models/User'
 
-interface Request extends NextApiRequest {
-  query: Apis.ApiUser.ReqActive
-}
+const router = createRoute<Apis.Error, { query: Apis.ApiUser.ReqActive }>()
 
-export default nc({
-  onError: handleError
-}).get(async (req: Request, res) => {
+router.get(async (req, res) => {
   await connect()
 
   const user = await User.findOneWithDeleted({ email: req.query.email })
@@ -32,10 +26,12 @@ export default nc({
   const encrypt = CryptoJS.AES.encrypt(activeAccountToken + '/' + user.email, process.env.ENCRYPT_SECRET_KEY || '')
 
   try {
-    await sendConfirmationEmail({ toUser: user.toObject(), hash: encrypt })
+    await sendVerifyEmail({ toUser: user.toObject(), hash: encrypt })
   } catch (e) {
-    return res.status(403).json({ error: 'Send confirmation email failed!' })
+    return res.status(403).json({ error: 'Send verify email failed!' })
   }
 
   res.status(200).json({})
 })
+
+export default routerHandler(router)

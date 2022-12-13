@@ -11,7 +11,7 @@ interface RequestExternal {
   user?: AccessType
 }
 
-export interface RequestVerify extends NextApiRequest, RequestExternal {}
+export type RequestVerify<T = {}> = NextApiRequest & RequestExternal & T
 
 export async function handleError(error: any, req: NextApiRequest, res: NextApiResponse<Apis.Error>): Promise<void> {
   res.status(500).json({ error: 'Error in server!' })
@@ -60,10 +60,12 @@ export async function verifyTokenAndAdmin(req: RequestVerify, res: NextApiRespon
     if (cookies.refreshToken) {
       try {
         const user = await asyncVerify(cookies.refreshToken, process.env.JWT_ACCESS_KEY || '')
-        if (typeof user === 'string') return res.status(404).json({ error: 'Token is invalid!' })
+
+        if (!user || typeof user === 'string') return res.status(404).json({ error: 'Token is invalid!' })
+        if (!user.admin) return res.status(403).json({ error: 'You are not admin' })
+
         req.user = user
-        next()
-        return
+        return next()
       } catch (e) {
         res.status(403).json({ error: 'Token is invalid' })
         console.log(e)

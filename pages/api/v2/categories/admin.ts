@@ -1,27 +1,20 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import nc from 'next-connect'
+import { NextApiRequest } from 'next'
+import { createRoute, routerHandler } from '~/config/nc'
+import { verifyTokenAndAdmin } from '~/tools/middleware'
 import { connect } from '~/config/db'
 import Category from '~/models/Category'
-import { handleError, verifyTokenAndAdmin } from '~/tools/middleware'
 
-interface RequestCreate extends NextApiRequest {
-  body: Apis.ApiCategory.ReqCreate
-}
+const router = createRoute<
+  Apis.ApiCategory.ResCreate | Apis.ApiDelete.Res,
+  {
+    body: Apis.ApiCategory.ReqCreate & Apis.ApiCategory.ReqEdit & Apis.ApiDelete.ReqBody
+    query: Apis.ApiDelete.ReqQuery
+  }
+>()
 
-interface RequestEdit extends NextApiRequest {
-  body: Apis.ApiCategory.ReqEdit
-}
-
-interface RequestDelete extends NextApiRequest {
-  query: Apis.ApiDelete.ReqQuery
-  body: Apis.ApiDelete.ReqBody
-}
-
-export default nc({
-  onError: handleError
-})
+router
   .use(verifyTokenAndAdmin)
-  .post(async (req: RequestCreate, res: NextApiResponse<Apis.ApiCategory.ResCreate | Apis.Error>) => {
+  .post(async (req: NextApiRequest & { body: Apis.ApiCategory.ReqCreate }, res) => {
     await connect()
 
     const category = new Category(req.body)
@@ -30,7 +23,7 @@ export default nc({
 
     res.status(200).json({ data: await getNewCategory(req.body.title) })
   })
-  .put(async (req: RequestEdit, res: NextApiResponse<Apis.ApiCategory.ResCreate | Apis.Error>) => {
+  .put(async (req: NextApiRequest & { body: Apis.ApiCategory.ReqEdit }, res) => {
     await connect()
 
     const category = await Category.findOneWithDeleted({ _id: req.body.id })
@@ -43,7 +36,7 @@ export default nc({
 
     res.status(200).json({ data: category.toObject() })
   })
-  .delete(async (req: RequestDelete, res: NextApiResponse<Apis.ApiDelete.Res | Apis.Error>) => {
+  .delete(async (req: NextApiRequest & { body: Apis.ApiDelete.ReqBody; query: Apis.ApiDelete.ReqQuery }, res) => {
     await connect()
 
     if (req.query.type === 'delete') {
@@ -69,3 +62,5 @@ async function getNewCategory(query: string): Promise<Models.Category> {
 
   return category.toObject()
 }
+
+export default routerHandler(router)

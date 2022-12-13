@@ -30,20 +30,20 @@ async function sendMail(message: SendMailOptions) {
   }
 }
 
-export const sendConfirmationEmail = ({ toUser, hash }: EmailData) => {
+export const sendVerifyEmail = ({ toUser, hash }: EmailData) => {
   const message: SendMailOptions = {
     from,
     to: toUser.email,
-    subject: 'WoT Blog - Activate Account',
+    subject: 'WoT Blog - Verify Account',
     html: EmailLayout(`
     <h3 style="font-size: 24px; margin: 4px 0; color: #000;">Hello ${toUser.name},</h3>
     <p>Thank you for registering into our Application. Much Appreciated! Just one last step is laying ahead of you...</p>
-    <p>To activate your account please follow this link: 
+    <p>To verify your account please follow this link: 
       <a
-        target="_" href="${server}/activate/${encodeURIComponent(hash.toString())}"
+        target="_" href="${server}/verify/${encodeURIComponent(hash.toString())}"
         style="color: #1a0dab; opacity: 0.8; transition: opacity 0.2s ease; border-bottom: 2px dashed currentColor; text-decoration: none;"
       >
-        Activate Account Link
+        Verify Account Link
       </a>
     </p>
       <p>Cheers,</p>

@@ -1,11 +1,9 @@
-import { NextApiResponse } from 'next'
-import nc from 'next-connect'
+import { createRoute, routerHandler } from '~/config/nc'
 import cookie from 'cookie'
-import { handleError } from '~/tools/middleware'
 
-export default nc({
-  onError: handleError
-}).get(async (req, res: NextApiResponse<string>) => {
+const router = createRoute<string>()
+
+router.get(async (req, res) => {
   res.setHeader(
     'Set-Cookie',
     cookie.serialize('refreshToken', '', {
@@ -18,3 +16,5 @@ export default nc({
   )
   res.status(200).json('Logout successfully!')
 })
+
+export default routerHandler(router)

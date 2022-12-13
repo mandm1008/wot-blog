@@ -1,28 +1,18 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import nc from 'next-connect'
+import { createRoute, routerHandler } from '~/config/nc'
 import Comment from '~/models/Comment'
 import Post from '~/models/Post'
 import { connect } from '~/config/db'
 import { pushUserToComments } from '~/tools/user'
 import { sort, toObject } from '~/tools'
-import { handleError, verifyToken, RequestVerify } from '~/tools/middleware'
+import { verifyToken, RequestVerify } from '~/tools/middleware'
 
-interface RequestGet extends NextApiRequest {
-  query: Apis.ApiComment.ReqGet
-}
+const router = createRoute<
+  Apis.ApiComment.ResGet | Apis.ApiComment.ResCreate,
+  { query: Apis.ApiComment.ReqGet; body: Apis.ApiComment.ReqCreate & Apis.ApiComment.ReqDelete }
+>()
 
-interface RequestCreate extends RequestVerify {
-  body: Apis.ApiComment.ReqCreate
-}
-
-interface RequestDelete extends RequestVerify {
-  body: Apis.ApiComment.ReqDelete
-}
-
-export default nc({
-  onError: handleError
-})
-  .get(async (req: RequestGet, res: NextApiResponse<Apis.ApiComment.ResGet | {}>) => {
+router
+  .get(async (req, res) => {
     try {
       await connect()
 
@@ -55,7 +45,7 @@ export default nc({
     }
   })
   .use(verifyToken)
-  .post(async (req: RequestCreate, res: NextApiResponse<Apis.ApiComment.ResCreate | Apis.Error>) => {
+  .post(async (req: RequestVerify<{ body: Apis.ApiComment.ReqCreate }>, res) => {
     try {
       await connect()
       if (!req.user || (typeof req.user !== 'string' && !req.user.id))
@@ -75,7 +65,7 @@ export default nc({
       res.status(500).json({ error: 'Error in server!' })
     }
   })
-  .delete(async (req: RequestDelete, res) => {
+  .delete(async (req: RequestVerify<{ body: Apis.ApiComment.ReqDelete }>, res) => {
     try {
       await connect()
       if (!req.user || (typeof req.user !== 'string' && !req.user.id))
@@ -93,3 +83,5 @@ export default nc({
       res.status(500).json({ error: 'Comment not found!' })
     }
   })
+
+export default routerHandler(router)
