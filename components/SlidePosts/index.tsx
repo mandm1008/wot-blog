@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback, memo } from 'react'
-import { useStore } from '../store'
+import { useEffect, useState, memo, useMemo } from 'react'
+import { useBrowserLayoutEffect } from '~/hooks'
 import classNames from 'classnames/bind'
 
 import styles from './SlidePosts.module.scss'
@@ -9,55 +9,41 @@ import Loading from '../Loading'
 
 const cx = classNames.bind(styles)
 
+const stylePost = { width: '340px' }
+
 function SlidePosts({ data = [], error, title }: { data: Apis.PostWithCategory[]; error?: any; title: string }) {
-  const [{ layout }] = useStore()
-  const [slide, setSlide] = useState(data.filter((post, i) => i < layout + 2))
-  const [isAnimation, setIsAnimation] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0)
   const [isNext, setIsNext] = useState(true)
+  const [isHover, setIsHover] = useState(false)
 
-  const handlePrevSlide = useCallback(() => {
-    setSlide((prev) => [data[data.findIndex((post) => post._id === prev[0]._id) - 1] || data[data.length - 1], ...prev])
-    setIsAnimation(true)
-    setIsNext(false)
-    return setTimeout(() => {
-      setIsAnimation(false)
-      setSlide((prev) => prev.filter((post, i) => i !== prev.length - 1))
-    }, 500)
-  }, [data])
+  const handler = useMemo(() => (isNext ? handleNext : handlePrev), [isNext])
 
-  const handleNextSlide = useCallback(() => {
-    setSlide((prev) => [...prev, data[data.findIndex((post) => post._id === prev[prev.length - 1]._id) + 1] || data[0]])
-    setIsAnimation(true)
+  useBrowserLayoutEffect(() => {
+    if (slideIndex < 0) setSlideIndex(data.length + slideIndex)
+    if (slideIndex >= data.length) setSlideIndex(slideIndex - data.length)
+  }, [data, slideIndex])
+
+  useEffect(() => {
+    const interval = !isHover ? setInterval(handler, 3000) : undefined
+
+    return () => clearInterval(interval)
+  }, [handler, isHover])
+
+  function handleNext() {
+    setSlideIndex((prev) => prev + 1)
     setIsNext(true)
-    return setTimeout(() => {
-      setIsAnimation(false)
-      setSlide((prev) => {
-        const [stem, ...results] = prev
-        return results
-      })
-    }, 500)
-  }, [data])
+  }
 
-  useEffect(() => {
-    setSlide(data.filter((post, i) => i < layout + 2))
-  }, [layout, data])
-  useEffect(() => {
-    let interval: NodeJS.Timer | undefined
-    if (!isAnimation && data.length > 0) {
-      interval = setInterval(() => {
-        isNext ? handleNextSlide() : handlePrevSlide()
-      }, 3000)
-    }
-    return () => {
-      clearInterval(interval)
-    }
-  }, [handleNextSlide, handlePrevSlide, isAnimation, isNext, data])
+  function handlePrev() {
+    setSlideIndex((prev) => prev - 1)
+    setIsNext(false)
+  }
 
   function renderLoading() {
     const results = []
-    for (let i = 0; i < layout; i++) {
+    for (let i = 0; i < 3; i++) {
       results.push(
-        <div className={cx('loading')}>
+        <div className={cx('loading', `active-${i + 1}`)}>
           <Loading />
         </div>
       )
@@ -65,45 +51,36 @@ function SlidePosts({ data = [], error, title }: { data: Apis.PostWithCategory[]
     return results
   }
 
+  function generationClass(i: number) {
+    if (i === calcIndex(slideIndex + 0)) return 'active-1'
+    if (i === calcIndex(slideIndex + 1)) return 'active-2'
+    if (i === calcIndex(slideIndex + 2)) return 'active-3'
+    if (i === calcIndex(slideIndex + 3)) return 'right'
+    if (i === calcIndex(slideIndex - 1)) return 'left'
+    return 'hide'
+  }
+
+  function calcIndex(number: number) {
+    if (number < 0) return data.length + number
+    if (number >= data.length) return number - data.length
+    return number
+  }
+
   return (
-    <div className={cx('wrapper')} style={{ alignItems: layout === 3 ? 'flex-start' : 'center' }}>
+    <div className={cx('wrapper')}>
       <div className={cx('title')}>
-        <ScrollSlide
-          size={30}
-          sizeIcon="10"
-          onPrev={isAnimation || data.length <= 0 ? () => {} : handlePrevSlide}
-          onNext={isAnimation || data.length <= 0 ? () => {} : handleNextSlide}
-        />
+        <ScrollSlide size={30} sizeIcon="10" onPrev={handlePrev} onNext={handleNext} />
         <span>{title}</span>
       </div>
 
-      <div
-        className={cx('content', {
-          prev: isAnimation && !isNext && layout === 3,
-          next: isAnimation && isNext && layout === 3,
-          prev2: isAnimation && !isNext && layout === 2,
-          next2: isAnimation && isNext && layout === 2,
-          prev1: isAnimation && !isNext && layout === 1,
-          next1: isAnimation && isNext && layout === 1
-        })}
-      >
+      <div className={cx('content')} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
         {data.length <= 0 && !error && renderLoading()}
         {error && data.length <= 0 && 'Error loading data'}
         {data.length > 0 &&
-          slide.map((post, i) => (
-            <PostItem
-              key={i}
-              data={post}
-              fadeOut={isAnimation && (isNext ? i === 1 : i === slide.length - 2)}
-              fadeIn={isAnimation && (isNext ? i === slide.length - 2 : i === 1)}
-              transRight={isAnimation && isNext && i === 1}
-              transLeft={isAnimation && !isNext && i === slide.length - 2}
-              style={{
-                marginLeft: layout === 3 && i === 0 ? -340 : 0 + 'px',
-                opacity: i === 0 || i === slide.length - 1 ? '0' : '1',
-                pointerEvents: i === 0 || i === slide.length - 1 ? 'none' : undefined
-              }}
-            />
+          data.map((post, i) => (
+            <div key={post._id} className={cx('post-item', generationClass(i))}>
+              <PostItem data={post} style={stylePost} />
+            </div>
           ))}
       </div>
     </div>
