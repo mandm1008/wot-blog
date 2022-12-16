@@ -21,26 +21,10 @@ interface Props {
   list?: boolean
   popular?: boolean
   style?: React.CSSProperties
-  fadeOut?: boolean
-  fadeIn?: boolean
-  transRight?: boolean
-  transLeft?: boolean
   rank?: number
 }
 
-function PostItem({
-  data: { categories = [], ...data },
-  big,
-  small,
-  list,
-  popular,
-  style,
-  fadeOut,
-  fadeIn,
-  transRight,
-  transLeft,
-  rank
-}: Props) {
+function PostItem({ data: { categories = [], ...data }, big, small, list, popular, style, rank }: Props) {
   const ImgCtn = big ? 'div' : Link
   const [{ layout }] = useStore()
 
@@ -51,11 +35,7 @@ function PostItem({
         big,
         small,
         list,
-        popular,
-        fadeOut,
-        fadeIn,
-        transRight,
-        transLeft
+        popular
       })}
       style={{ ['--cl' as any]: categories[0]?.color, ...style }}
     >

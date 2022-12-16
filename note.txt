@@ -44,4 +44,8 @@ line 341
     restore<ResultDoc = HydratedDocument<T, TMethodsAndOverrides, TVirtuals>>(filter: FilterQuery<T>, options?: QueryOptions<T> | null, callback?: (err: CallbackError, doc: ResultDoc | null, res: any) => void): Promise<void>;
 
 
+2. add index.d.ts -> mongoose-slug-generator
+
+  declare module 'mongoose-slug-generator';
+
 <-- ----------------------------------------------------- -->
