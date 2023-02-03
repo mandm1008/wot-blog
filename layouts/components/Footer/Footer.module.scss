@@ -46,7 +46,7 @@
     display: inline-flex;
     padding: 20px;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: 700;
     text-transform: uppercase;
     color: #848488;
@@ -80,10 +80,11 @@
 @media screen and (max-width: 480px) {
   .content {
     .item {
-      font-size: 0.6rem;
+      font-size: 1rem;
     }
+
     .main-item {
-      font-size: 1.6rem;
+      font-size: 2rem;
     }
   }
 }

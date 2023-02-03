@@ -14,9 +14,9 @@ function Footer() {
         <Link href="/about" className={cx('item')}>
           About us
         </Link>
-        <Link href="/course" className={cx('item')}>
+        {/* <Link href="/course" className={cx('item')}>
           Course
-        </Link>
+        </Link> */}
         <Link href="/" className={cx('item', 'main-item')}>
           <Image
             src="/logo.png"
@@ -30,9 +30,9 @@ function Footer() {
         <Link href="/contact" className={cx('item')}>
           Contact
         </Link>
-        <Link href="/privacy" className={cx('item')}>
+        {/* <Link href="/privacy" className={cx('item')}>
           Privacy
-        </Link>
+        </Link> */}
       </div>
       <div className={cx('contact')}>
         <Link href="/coming-soon" target="_blank" className={cx('item')}>

@@ -436,9 +436,12 @@
     padding: 0 8px;
   }
   .list {
-    span:first-child {
-      width: 210px !important;
-      height: 140px !important;
+    // span:first-child {
+    //   width: 210px !important;
+    //   height: 140px !important;
+    // }
+    & > a {
+      max-width: 50% !important;
     }
 
     .category {
