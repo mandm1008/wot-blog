@@ -1,7 +1,7 @@
 .head {
-  padding: 70px 0;
+  padding: 0 0 180px;
   font-family: 'Source Sans Pro';
-  font-size: 7rem;
+  font-size: 6rem;
   font-weight: 700;
   text-align: center;
   background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
@@ -17,6 +17,139 @@
       &:hover {
         color: var(--primary);
       }
+    }
+  }
+
+  .team {
+    font-size: 2rem;
+    color: rgba($color: #fff, $alpha: 0.3);
+  }
+
+  .title {
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .sub-title {
+    font-size: 4rem;
+  }
+}
+
+.wrapper {
+  transform: translateY(-50px);
+  width: var(--layout-width);
+}
+
+.inner {
+  --times: 1s;
+  position: relative;
+  margin-right: 250px;
+  border-radius: 16px;
+  padding: 24px;
+  background: radial-gradient(at 18% 99%, rgb(223, 229, 113) 0px, transparent 50%) repeat scroll 0% 0%,
+    radial-gradient(at 97% 8%, rgb(118, 249, 173) 0px, transparent 50%) repeat scroll 0% 0%,
+    radial-gradient(at 79% 82%, rgb(233, 109, 131) 0px, transparent 50%) repeat scroll 0% 0%,
+    radial-gradient(at 96% 10%, rgb(222, 81, 251) 0px, transparent 50%) repeat scroll 0% 0%,
+    radial-gradient(at 42% 20%, rgb(116, 240, 251) 0px, transparent 50%) repeat scroll 0% 0%,
+    radial-gradient(at 4% 49%, rgb(203, 88, 218) 0px, transparent 50%) repeat scroll 0% 0%,
+    rgba(0, 0, 0, 0) radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat scroll 0% 0%;
+  box-shadow: rgba($color: #000, $alpha: 0.05) 10px 10px 10px, rgba($color: #000, $alpha: 0.05) -10px 10px 10px;
+  opacity: 0;
+  transition: opacity var(--times) ease-in;
+
+  & ~ .inner {
+    margin-top: 120px;
+  }
+
+  .avatar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    // transform: translate(200px, -100px);
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 16px;
+    box-shadow: rgba($color: #000, $alpha: 0.05) 10px 10px 10px, rgba($color: #000, $alpha: 0.05) -10px 10px 10px;
+    transform: translate(-100%, -100px);
+    transition: transform var(--times) ease-in;
+  }
+
+  .content {
+    margin-right: 100px;
+    text-align: justify;
+    transform: translateX(100%);
+    transition: transform var(--times) ease-in;
+
+    .name {
+      font-size: 4rem;
+      font-family: 'Source Sans Pro';
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .jobs {
+      font-size: 2rem;
+      font-family: 'Source Sans Pro';
+      color: rgba($color: #000, $alpha: 0.3);
+      margin-bottom: 24px;
+      margin-left: 4px;
+    }
+
+    .discription {
+      h4 {
+        margin: 12px 0 6px;
+        font-size: 2rem;
+        font-family: 'Source Sans Pro';
+      }
+
+      p {
+        font-family: 'Merriweather';
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-left: 12px;
+      }
+
+      p:first-child,
+      p:nth-child(2) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &.left {
+    margin-right: 0;
+    margin-left: 250px;
+
+    .avatar {
+      right: auto;
+      left: 0;
+      transform: translate(100%, -100px);
+    }
+
+    .content {
+      margin-right: 0;
+      margin-left: 100px;
+      transform: translateX(-100%);
+    }
+  }
+}
+
+.inner.active {
+  opacity: 1;
+
+  .avatar {
+    transform: translate(200px, -100px);
+  }
+
+  .content {
+    transform: translateX(0);
+  }
+
+  &.left {
+    .avatar {
+      transform: translate(-200px, -100px);
     }
   }
 }

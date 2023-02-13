@@ -20,7 +20,7 @@ function Wrapper({ children, Head, Content, background }: Props) {
         <div className={cx('inner', { default: !background })}>
           {background && (
             <div className={cx('background')}>
-              <Image src={background} alt="Banner" layout="fill" />
+              <Image src={background} alt="Banner" sizes="100vw" fill />
             </div>
           )}
           {Content}
