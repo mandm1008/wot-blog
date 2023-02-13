@@ -13,11 +13,18 @@ export default nc({
   .use(verifyTokenAndAdmin)
   .post(async (req: Request, res) => {
     await connect()
-    const content = await Content.findOne({ postId: req.body.id })
-    content.content = req.body.content
+    const dbData = await Content.findOne<Models.Content>({ postId: req.body.id })
+    if (!dbData) return res.status(404).json({ error: 'Not found!' })
+
+    const index = dbData.content.findIndex(c => c.userId === req.body.content.userId)
+    if (index < 0) {
+      dbData.content.push(req.body.content)
+    } else {
+      dbData.content[index].value = req.body.content.value
+    }
 
     try {
-      await content.save()
+      await dbData.save()
     } catch (e) {
       return res.status(403).json({ error: 'Save failed!' })
     }

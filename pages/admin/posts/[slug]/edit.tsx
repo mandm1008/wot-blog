@@ -182,6 +182,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
     } catch (e) {
       return redirectObject
     }
+  } else {
+    return redirectObject
   }
   if (!user || typeof user === 'string' || !user.admin) return redirectObject
 

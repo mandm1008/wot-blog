@@ -26,6 +26,7 @@ declare namespace Models {
   type ContentItem = { userId: string; value: string }
 
   interface Content extends Model {
+    [x: string]: any
     postId: string
     content: ContentItem[]
   }
