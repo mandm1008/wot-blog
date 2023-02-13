@@ -238,7 +238,7 @@ declare namespace Apis {
   namespace ApiContent {
     interface ReqEdit {
       id: string
-      content: string
+      content: Models.ContentItem
     }
   }
 

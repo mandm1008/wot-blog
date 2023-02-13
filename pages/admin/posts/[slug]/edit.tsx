@@ -16,6 +16,7 @@ import CheckBox from '~/components/CheckBox'
 import TinyMCE from '~/components/TinyMCE'
 import { UploadImages, UploadFiles } from '~/components/Upload'
 import AutoSave from '~/components/AutoSave'
+import { useStore } from '~/components/store'
 import Timer from '~/components/Timer'
 import { formatContentHTML } from '~/tools'
 import { PostServer, ContentServer } from '~/servers'
@@ -33,6 +34,7 @@ function EditPost({
   selectedCategories: string
 }) {
   const router = useRouter()
+  const [{ user }] = useStore()
   const mainPost: Models.Post = JSON.parse(post)
   const listCategory: Apis.Vi_Hi<Models.Category[]> = JSON.parse(categories)
   const listSelectedCategory = JSON.parse(selectedCategories)
@@ -47,6 +49,8 @@ function EditPost({
   const postedTime = useRef<React.MutableRefObject<HTMLInputElement>>()
 
   async function handleUpdatePost() {
+    if (user === null) return
+
     const content = valueContent.current!.current && valueContent.current!.current.getContent()
 
     const body = {
@@ -62,7 +66,7 @@ function EditPost({
     }
 
     toast.loading('Updating...', { id: 'update' })
-    await ContentServer.autoSave({ id: body._id, content: body.content })
+    await ContentServer.autoSave({ id: body._id, content: { userId: user._id, value: body.content } })
 
     const response = await PostServer.edit(body)
 
@@ -134,14 +138,7 @@ function EditPost({
               }
             >
               <div className={cx('image-ctn')}>
-                <Image
-                  objectFit="cover"
-                  width={284}
-                  height={184}
-                  layout="intrinsic"
-                  src={srcImage || '/upload.jpg'}
-                  alt="Banner"
-                />
+                <Image width={284} height={184} src={srcImage || '/upload.jpg'} alt="Banner" />
               </div>
             </Tippy>
 
@@ -164,13 +161,29 @@ function EditPost({
 }
 
 import { GetServerSideProps } from 'next'
+import cookie from 'cookie'
 import { getPostBySlug, getContentForPostAdmin } from '~/tools/post'
 import { getAllCategory, getListCategory } from '~/tools/category'
-import { verifyAdmin } from '~/tools/middleware'
+import { AccessType, asyncVerify } from '~/tools/middleware'
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const noAdmin = await verifyAdmin(req as any)
-  if (noAdmin) return noAdmin
+  const redirectObject = {
+    redirect: {
+      destination: '/admin/login'
+    },
+    props: {}
+  }
+  const cookies = req.headers.cookie ? cookie.parse(req.headers.cookie) : {}
+  let user: AccessType | string | undefined
+
+  if (cookies.refreshToken) {
+    try {
+      user = await asyncVerify(cookies.refreshToken, process.env.JWT_ACCESS_KEY || '')
+    } catch (e) {
+      return redirectObject
+    }
+  }
+  if (!user || typeof user === 'string' || !user.admin) return redirectObject
 
   const post = await getPostBySlug(params!.slug as string)
   if (!post)
@@ -181,7 +194,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
       }
     }
 
-  post.content = (await getContentForPostAdmin(post._id)) || post.content
+  post.content =
+    (await getContentForPostAdmin(post._id)).find(
+      (content) => user && typeof user !== 'string' && content.userId === user.id
+    )?.value || post.content
   const categories = await getAllCategory(true)
   const selectedCategories = await getListCategory(post.categoryId, true)
 

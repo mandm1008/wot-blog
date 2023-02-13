@@ -23,9 +23,11 @@ declare namespace Models {
     replyId: string
   }
 
+  type ContentItem = { userId: string; value: string }
+
   interface Content extends Model {
     postId: string
-    content: string
+    content: ContentItem[]
   }
 
   interface Email extends Model {

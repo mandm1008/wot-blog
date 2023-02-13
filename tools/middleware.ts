@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { verify, JwtPayload } from 'jsonwebtoken'
 import cookie from 'cookie'
 
-interface AccessType extends JwtPayload {
+export interface AccessType extends JwtPayload {
   id?: string
   admin?: boolean
 }
