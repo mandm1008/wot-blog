@@ -19,7 +19,7 @@ function AutoSave({
   const [{ user }] = useStore()
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(true)
-  const [oldContent, setOldContent] = useState(content.current!.current.getContent() || '')
+  const [oldContent, setOldContent] = useState('')
 
   useEffect(() => {
     const interval = loading
