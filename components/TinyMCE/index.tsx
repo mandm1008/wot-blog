@@ -1,7 +1,7 @@
 import { useRef, forwardRef, useEffect, memo } from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 import { Editor as TinyMCEEditor } from 'tinymce'
-
+import { server } from '~/config/constants'
 function TinyMCE({ children }: { children: string }, ref: any) {
   const editorRef = useRef<TinyMCEEditor>()
 
@@ -97,7 +97,11 @@ function TinyMCE({ children }: { children: string }, ref: any) {
           word-wrap: break-word;
         }
         `,
-        font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt'
+        font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+        relative_urls: false,
+        remove_script_host: false,
+        convert_urls: true,
+        document_base_url: server
       }}
     />
   )

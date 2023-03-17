@@ -1,4 +1,4 @@
-import NextImage, { ImageProps } from 'next/future/image'
+import NextImage, { ImageProps } from 'next/image'
 import { demoImage } from '~/assets/images'
 
 function Image(props: ImageProps) {
