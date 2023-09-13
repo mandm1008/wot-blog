@@ -1,6 +1,3 @@
-# Nextjs Blog
-
-Preview: https://writeortalk.com/
 
 ## Tech
 
